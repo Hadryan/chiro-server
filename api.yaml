@@ -1,0 +1,55 @@
+openapi: "3.0"
+info:
+  title: Grocery Delivery Service - GDS
+  description: This is a sample server for a pet store.
+  termsOfService: http://example.com/terms/
+  contact:
+    name: API Support
+    url: http://www.example.com/support
+    email: support@example.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.1
+servers:
+  - url: http://api.gds.service
+paths:
+  /auth/request:
+    post:
+      description: Submit a phone number to receive a verification code
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+              required:
+                - phone
+      responses:
+        "200":
+          description: the phone number was accepted and a verification code was sent to it via sms
+  /auth/verify:
+    post:
+      description: Submit the phone number and the verification code to receive a JWT token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                code:
+                  type: string
+              required:
+                - phone
+                - code
+      responses:
+        "200":
+          description: the phone number and the code was accepted
+        "401":
+          description: the code is wrong
