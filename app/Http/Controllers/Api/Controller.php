@@ -23,8 +23,12 @@ class Controller extends BaseController
 
     public function fail($message, $code)
     {
-        return response()->json([
-            'message' => $message
-        ], $code);
+        $response = [];
+        if (is_array($message)) {
+            $response['messages'] = $message;
+        } else {
+            $response['message'] = $message;
+        }
+        return response()->json($response, $code);
     }
 }

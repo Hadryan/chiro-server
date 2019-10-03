@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\Controller;
 use Illuminate\Http\Request;
 use App\Services\SMS\SmsInterface;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Validator;
+use \App\Model\User;
 
 class AuthController extends Controller
 {
@@ -14,12 +16,50 @@ class AuthController extends Controller
 
     public function request(Request $request, SmsInterface $smsService)
     {
+        $validator = Validator::make($request->all(), [
+            'phone' => ['required', 'regex:@^(0|98)9[0-9]{9}$@']
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respond($validator->errors(), 400, __('auth.invalid_params'));
+        }
+
         $phone = $request->input('phone');
 
         $code = $smsService->sendOtp($phone);
 
         Redis::set(self::OTP_PHONE_PREFIX . $phone, $code);
+        Redis::expire(self::OTP_PHONE_PREFIX . $phone, 120);
 
         return $this->respond(null, 200, __("auth.otp_code_sent"));
+    }
+
+    public function verify(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => ['required', 'regex:@^(0|98)9[0-9]{9}$@'],
+            'code' => 'required|numeric'
+        ]);
+        if ($validator->fails()) {
+            return $this->respond($validator->errors(), 400, __('auth.invalid_params'));
+        }
+
+        $phone = $request->input('phone');
+        $code = $request->input('code');
+
+        $correctCode = Redis::get(self::OTP_PHONE_PREFIX . $phone);
+
+        if ($code !== $correctCode) {
+            return $this->fail(__('auth.incorrect_code'), 401);
+        }
+
+        $user = User::create([
+            'phone' => $phone,
+            'name' => '',
+        ]);
+
+        return $this->respond([
+            'user' => $user->toArray()
+        ]);
     }
 }
