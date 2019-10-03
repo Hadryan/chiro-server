@@ -18,7 +18,7 @@ class AuthController extends Controller
 
         $code = $smsService->sendOtp($phone);
 
-        Redis::set(OTP_PHONE_PREFIX . $phone, $code);
+        Redis::set(self::OTP_PHONE_PREFIX . $phone, $code);
 
         return $this->respond(null, 200, __("auth.otp_code_sent"));
     }
