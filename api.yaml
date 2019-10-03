@@ -12,7 +12,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.1
 servers:
-  - url: http://api.gds.service
+  - url: http://localhost:8080
 paths:
   /auth/request:
     post:
@@ -31,6 +31,8 @@ paths:
       responses:
         "200":
           description: the phone number was accepted and a verification code was sent to it via sms
+        "400":
+          description: the input phone number is invalid or nonexistent
   /auth/verify:
     post:
       description: Submit the phone number and the verification code to receive a JWT token
@@ -51,5 +53,7 @@ paths:
       responses:
         "200":
           description: the phone number and the code was accepted
+        "400":
+          description: the input phone number is invalid or nonexistent
         "401":
           description: the code is wrong

@@ -39,7 +39,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'phone' => ['required', 'regex:@^(0|98)9[0-9]{9}$@'],
-            'code' => 'required|numeric'
+            'code' => 'required'
         ]);
         if ($validator->fails()) {
             return $this->respond($validator->errors(), 400, __('auth.invalid_params'));
