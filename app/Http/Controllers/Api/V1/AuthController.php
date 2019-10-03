@@ -63,10 +63,13 @@ class AuthController extends Controller
             ]);
         }
 
-
+        $token = $jwtService->generateJwtToken([
+            'uid' => $user->id,
+        ]);
 
         return $this->respond([
-            'user' => $user->toArray()
+            'user' => $user->toArray(),
+            'token' => $token
         ]);
     }
 }
