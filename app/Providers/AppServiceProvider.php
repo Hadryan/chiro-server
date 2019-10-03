@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->bind(\App\Services\SMS\SmsInterface::class, \App\Services\Sms\Kavenegar::class);
+        $this->app->singleton(\App\Services\JWT\JWTServiceInterface::class, \App\Services\JWT\JWTService::class);
     }
 
     /**

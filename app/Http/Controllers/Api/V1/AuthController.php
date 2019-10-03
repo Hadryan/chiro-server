@@ -8,6 +8,7 @@ use App\Services\SMS\SmsInterface;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use \App\Model\User;
+use \App\Services\JWT\JWTServiceInterface;
 
 class AuthController extends Controller
 {
@@ -34,7 +35,7 @@ class AuthController extends Controller
         return $this->respond(null, 200, __("auth.otp_code_sent"));
     }
 
-    public function verify(Request $request)
+    public function verify(Request $request, JWTServiceInterface $jwtService)
     {
         $validator = Validator::make($request->all(), [
             'phone' => ['required', 'regex:@^(0|98)9[0-9]{9}$@'],
@@ -53,10 +54,16 @@ class AuthController extends Controller
             return $this->fail(__('auth.incorrect_code'), 401);
         }
 
-        $user = User::create([
-            'phone' => $phone,
-            'name' => '',
-        ]);
+        $user = User::where('phone', $phone)->first();
+
+        if ($user === null) {
+            $user = User::create([
+                'phone' => $phone,
+                'name' => '',
+            ]);
+        }
+
+
 
         return $this->respond([
             'user' => $user->toArray()

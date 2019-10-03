@@ -80,18 +80,6 @@ class AuthControllerTest extends TestCase
      */
     public function testVerifySuccssful()
     {
-        $fakeUser = new \App\Model\User([
-            'id' => 1,
-            'name' => 'Hamed Momeni',
-            'email' => 'hamed@test.com',
-            'phone' => '09123456789',
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ]);
-        $this->mock(\App\Model\User::class, function ($mock) use ($fakeUser) {
-            $mock->shouldReceive('create')->andReturn($fakeUser->toArray());
-        });
-
         $response = $this->post('api/v1/auth/verify', [
             'phone' => '09123456789',
             'code' => '12345'
@@ -100,7 +88,9 @@ class AuthControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertJson([
             'data' => [
-                'user' => $fakeUser->toArray()
+                'user' => [
+                    'phone' => '09123456789'
+                ]
             ]
         ]);
     }
