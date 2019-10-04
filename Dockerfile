@@ -34,6 +34,10 @@ RUN apk --no-cache --update add \
     php7-redis \
     php7-xdebug
 
+COPY ./.docker/php/www.conf /etc/php/7.3/php-fpm.d/
+
 COPY . /app
 
 WORKDIR /app
+
+RUN chown www-data:www-data storage -R

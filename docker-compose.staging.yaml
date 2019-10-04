@@ -1,0 +1,38 @@
+version: "3"
+services:
+  api:
+    image: code.putech.ir:5000/chiro-server:latest
+    command: ["sh", "/app/startup.sh"]
+    environment:
+      - CFG_MYSQL_HOST=db
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=default
+      - DB_USERNAME=default
+      - DB_PASSWORD=123456
+
+  nginx:
+    image: code.putech.ir:5000/chiro-nginx:latest
+    ports:
+      - 8080:80
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+  db:
+    image: mysql:5
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=123456
+      - MYSQL_USER=default
+      - MYSQL_DATABASE=default
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
