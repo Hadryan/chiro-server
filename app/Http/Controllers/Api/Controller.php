@@ -13,12 +13,7 @@ class Controller extends BaseController
 
     public function respond($data, $code = 200, $message = null)
     {
-        $response = [];
-        $response['data'] = $data;
-        if ($message != null) {
-            $response['message'] = $message;
-        }
-        return response()->json($response, $code);
+        return response()->json($data, $code, ['X-Message' => $message]);
     }
 
     public function fail($message, $code)

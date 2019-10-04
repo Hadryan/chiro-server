@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
 
-        $this->app->singleton(\App\Services\SMS\SmsInterface::class, \App\Services\Sms\Kavenegar::class);
+        $this->app->singleton(\App\Services\SMS\SmsInterface::class, \App\Services\SMS\Kavenegar::class);
         $this->app->singleton(\App\Services\JWT\JWTServiceInterface::class, function () {
             return new \App\Services\JWT\JWTService(config('jwt.jwt_key'));
         });

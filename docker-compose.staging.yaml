@@ -11,6 +11,7 @@ services:
       - DB_DATABASE=default
       - DB_USERNAME=default
       - DB_PASSWORD=123456
+      - REDIS_HOST=redis
 
   nginx:
     image: code.putech.ir:5000/chiro-nginx:latest

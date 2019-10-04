@@ -1,12 +1,12 @@
 openapi: "3.0.0"
 info:
   title: Grocery Delivery Service - GDS
-  description: This is a sample server for a pet store.
+  description: The API server for Grocery Delivery Service.
   termsOfService: http://example.com/terms/
   contact:
     name: API Support
     url: http://www.example.com/support
-    email: support@example.com
+    email: hamed.ma7@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -25,7 +25,7 @@ components:
         name:
           type: string
 paths:
-  /auth/request:
+  /api/v1/auth/request:
     post:
       description: Submit a phone number to receive a verification code
       requestBody:
@@ -44,7 +44,7 @@ paths:
           description: the phone number was accepted and a verification code was sent to it via sms
         "400":
           description: the input phone number is invalid or nonexistent
-  /auth/verify:
+  /api/v1/auth/verify:
     post:
       description: Submit the phone number and the verification code to receive a JWT token
       requestBody:

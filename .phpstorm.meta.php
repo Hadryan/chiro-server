@@ -5,13 +5,14 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2019-10-03 16:35:52.
+    * Generated on 2019-10-04 18:39:25.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -74,6 +75,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -165,6 +167,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -227,6 +230,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -318,6 +322,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -380,6 +385,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -471,6 +477,7 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -533,6 +540,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -624,6 +632,7 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -686,6 +695,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -777,6 +787,7 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -839,6 +850,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -930,6 +942,7 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -992,6 +1005,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
@@ -1083,6 +1097,7 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -1145,6 +1160,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.job.make' => \Illuminate\Foundation\Console\JobMakeCommand::class,
         'command.key.generate' => \Illuminate\Foundation\Console\KeyGenerateCommand::class,
+        'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
