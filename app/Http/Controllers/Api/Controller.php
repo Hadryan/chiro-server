@@ -19,7 +19,7 @@ class Controller extends BaseController
     public function fail($message, $code)
     {
         $response = [];
-        if (is_array($message)) {
+        if (!is_string($message)) {
             $response['messages'] = $message;
         } else {
             $response['message'] = $message;

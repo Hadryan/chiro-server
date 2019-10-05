@@ -19,10 +19,7 @@ class AuthControllerTest extends TestCase
         $response = $this->post('api/v1/auth/request', ['phone' => '09123456789']);
 
         $response->assertStatus(200);
-        $response->assertJson([
-            'data' => null,
-            'message' => __("auth.otp_code_sent")
-        ]);
+        $response->assertJson([]);
     }
     /**
      * @Test
@@ -34,14 +31,18 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(400);
         $response->assertJson([
-            'message' => __('auth.invalid_params')
+            'messages' => [
+                'phone' => []
+            ]
         ]);
 
         $response = $this->post('api/v1/auth/request', []);
 
         $response->assertStatus(400);
         $response->assertJson([
-            'message' => __('auth.invalid_params')
+            'messages' => [
+                'phone' => []
+            ]
         ]);
     }
     /**
@@ -53,7 +54,10 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(400);
         $response->assertJson([
-            'message' => __('auth.invalid_params')
+            'messages' => [
+                'phone' => [],
+                'code' => [],
+            ]
         ]);
     }
 
@@ -87,10 +91,8 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'data' => [
-                'user' => [
-                    'phone' => '09123456789'
-                ]
+            'user' => [
+                'phone' => '09123456789'
             ]
         ]);
     }

@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->respond($validator->errors(), 400, __('auth.invalid_params'));
+            return $this->fail($validator->errors(), 400);
         }
 
         $phone = $request->input('phone');
@@ -32,7 +32,7 @@ class AuthController extends Controller
         Redis::set(self::OTP_PHONE_PREFIX . $phone, $code);
         Redis::expire(self::OTP_PHONE_PREFIX . $phone, 120);
 
-        return $this->respond(null, 200, __("auth.otp_code_sent"));
+        return $this->respond([], 200, __("auth.otp_code_sent"));
     }
 
     public function verify(Request $request, JWTServiceInterface $jwtService)
@@ -42,7 +42,7 @@ class AuthController extends Controller
             'code' => 'required'
         ]);
         if ($validator->fails()) {
-            return $this->respond($validator->errors(), 400, __('auth.invalid_params'));
+            return $this->fail($validator->errors(), 400);
         }
 
         $phone = $request->input('phone');
