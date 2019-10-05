@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/schema.yaml', function () {
-    return File::get(public_path('openapi.yaml'));
-});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

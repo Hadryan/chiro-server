@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('docs/api/schema.yaml', function () {
+    return File::get(public_path('openapi.yaml'));
+});
