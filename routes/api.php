@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function () {
     Route::post('auth/request', 'AuthController@request');
     Route::post('auth/verify', 'AuthController@verify');
+
+    Route::get('products', 'ProductController@index');
 });

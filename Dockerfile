@@ -32,7 +32,8 @@ RUN apk --no-cache --update add \
     php7-zip \
     php7-zlib \
     php7-redis \
-    php7-xdebug
+    php7-xdebug \
+    php7-pgsql
 
 COPY ./.docker/php/www.conf /etc/php/7.3/php-fpm.d/
 
