@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description')->default('');
             $table->jsonb('properties')->nullable();
+            $table->integer('price')->default(0);
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
     }

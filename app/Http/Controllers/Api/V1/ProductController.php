@@ -8,6 +8,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return $this->respond([]);
+        return $this->respond(\App\Model\Product::all());
     }
 }
