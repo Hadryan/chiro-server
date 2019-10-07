@@ -2,20 +2,27 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Auth\AuthenticationException;
+use App\Services\JWT\JWTServiceInterface;
+use App\Model\User;
 
-class Authenticate extends Middleware
+class Authenticate
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string
-     */
-    protected function redirectTo($request)
+    public function handle(Request $request, Closure $next)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        $token = $request->headers->get('Authorization');
+        $token = explode(' ', $token);
+        $token = $token[1] ?? '';
+
+        $jwtService = app(JWTServiceInterface::class);
+
+        if (!$jwtService->validateJwtToken($token)) {
+            throw new AuthenticationException();
         }
+
+        $uid = $jwtService->getClaims()['uid'];
+        auth('api')->setUser(User::find($uid));
     }
 }
