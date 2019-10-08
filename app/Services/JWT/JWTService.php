@@ -33,11 +33,24 @@ class JWTService implements JWTServiceInterface
 
     public function validateJwtToken(string $token): bool
     {
-        $data = new ValidationData();
-        $data->setIssuer(app('url')->to('/'));
 
+        try {
+            $data = new ValidationData();
+            $data->setIssuer(app('url')->to('/'));
+
+            $token = (new Parser())->parse((string) $token);
+            return $token->validate($data);
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return false;
+        }
+    }
+
+
+    public function getUserId($token): array
+    {
         $token = (new Parser())->parse((string) $token);
 
-        return $token->validate($data);
+        return $token->getClaims();
     }
 }
