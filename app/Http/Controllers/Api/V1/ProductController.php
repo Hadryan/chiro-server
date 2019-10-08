@@ -8,6 +8,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        dd(auth('api')->getUser());
         return $this->respond(\App\Model\Product::all());
     }
 }

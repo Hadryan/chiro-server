@@ -4,5 +4,5 @@ namespace App\Services\SMS;
 
 interface SmsInterface
 {
-    public function sendOtp(string $phone): string;
+    public function sendOtp(string $phone, string $code): string;
 }

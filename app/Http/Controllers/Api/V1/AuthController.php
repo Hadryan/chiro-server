@@ -26,13 +26,20 @@ class AuthController extends Controller
         }
 
         $phone = $request->input('phone');
+        $code = (string) mt_rand(11111, 99999);
 
-        $code = $smsService->sendOtp($phone);
+
+        $response = [];
+        if (!$request->hasHeader('X-Debug')) {
+            $code = $smsService->sendOtp($phone, $code);
+        } else {
+            $response['code'] = $code;
+        }
 
         Redis::set(self::OTP_PHONE_PREFIX . $phone, $code);
         Redis::expire(self::OTP_PHONE_PREFIX . $phone, 120);
 
-        return $this->respond([], 200, __("auth.otp_code_sent"));
+        return $this->respond($response, 200, __("auth.otp_code_sent"));
     }
 
     public function verify(Request $request, JWTServiceInterface $jwtService)

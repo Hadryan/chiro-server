@@ -10,7 +10,7 @@ class Bitel extends SmsBase implements SmsInterface
         parent::__construct('https://api.bitel.rest');
     }
 
-    public function sendCodeBySms(string $code, string $phone): bool
+    public function sendCodeBySms(string $phone, string $code): bool
     {
         try {
             $this->guzzle->post('api/v2/sms/otp', [

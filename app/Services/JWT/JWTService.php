@@ -47,7 +47,7 @@ class JWTService implements JWTServiceInterface
     }
 
 
-    public function getUserId($token): array
+    public function getClaims(string $token): array
     {
         $token = (new Parser())->parse((string) $token);
 

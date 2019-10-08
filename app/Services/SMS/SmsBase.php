@@ -14,7 +14,6 @@ class SmsBase
             'base_uri' => $baseUrl,
             'allow_redirects' => true,
             'timeout' => 3,
-
         ]);
     }
 

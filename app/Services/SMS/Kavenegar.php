@@ -13,9 +13,8 @@ class Kavenegar extends SmsBase implements SmsInterface
             )
         );
     }
-    public function sendOtp(string $phone): string
+    public function sendOtp(string $phone, string $code): string
     {
-        $code = mt_rand(11111, 99999);
         try {
             $this->guzzle->post('verify/lookup.json', [
                 'query' => [
