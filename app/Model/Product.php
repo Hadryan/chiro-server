@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property string $name
  * @property string $description
+ * @property integer $price
+ * @property integer $discount
  * @property \App\Model\ProductProperties $properties
  */
 class Product extends Model

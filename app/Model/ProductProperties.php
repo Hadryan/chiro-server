@@ -17,4 +17,9 @@ class ProductProperties extends Collection
         }
         throw new \RunntimeException("invalid property $key");
     }
+
+    public function __set($key, $value)
+    {
+        $this->put($key, $value);
+    }
 }
