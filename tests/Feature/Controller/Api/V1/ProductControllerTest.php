@@ -17,4 +17,25 @@ class ProductControllerTest extends TestCase
         $response->assertOk();
         $response->assertJsonCount(count($products));
     }
+
+    public function testSingleProduct()
+    {
+        $response = $this->get('/api/v1/products/1');
+
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'id',
+            'name',
+            'price',
+            'discount',
+            'properties',
+        ]);
+    }
+
+    public function testSignleProductInvalidId()
+    {
+        $response = $this->get('/api/v1/products/wrongId');
+
+        $response->assertNotFound();
+    }
 }

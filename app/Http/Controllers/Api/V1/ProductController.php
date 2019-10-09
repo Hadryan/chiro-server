@@ -12,4 +12,11 @@ class ProductController extends Controller
         $products = Product::paginate();
         return $this->respond($products->items());
     }
+
+    public function single($id)
+    {
+        $product = Product::find($id);
+
+        return $this->respond($product);
+    }
 }
