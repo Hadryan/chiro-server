@@ -26,4 +26,12 @@ class Product extends Model
     {
         $this->attributes['properties'] = $properties->toJson();
     }
+    public function image()
+    {
+        return $this->hasOne('App\Model\ProductImage')->select(['product_id', 'path']);
+    }
+    public function images()
+    {
+        return $this->hasMany('App\Model\ProductImage')->select(['product_id', 'path']);
+    }
 }

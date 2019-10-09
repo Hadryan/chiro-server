@@ -9,13 +9,13 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate();
+        $products = Product::with('image')->paginate();
         return $this->respond($products->items());
     }
 
     public function single($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('images')->find($id);
 
         return $this->respond($product);
     }
