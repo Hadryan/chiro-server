@@ -1,39 +1,38 @@
 FROM dockage/php:7-fpm
 
-RUN apk --no-cache --update add \
-    composer \
-    confd@testing \
-    file \
-    git \
-    mariadb-client \
-    openssh-client \
-    openssl \
-    php7-bcmath \
-    php7-ctype \
-    php7-curl \
-    php7-dom \
-    php7-gd \
-    php7-gettext \
-    php7-iconv \
-    php7-intl \
-    php7-json \
-    php7-mbstring \
-    php7-mcrypt \
-    php7-mysqli \
-    php7-pdo_mysql \
-    php7-phar \
-    php7-session \
-    php7-simplexml \
-    php7-soap \
-    php7-tokenizer \
-    php7-xml \
-    php7-xmlreader \
-    php7-xmlwriter \
-    php7-zip \
-    php7-zlib \
-    php7-redis \
-    php7-xdebug \
-    php7-pgsql
+RUN apk --no-cache --update add
+RUN apk add composer
+RUN apk add confd@testing
+RUN apk add file
+RUN apk add git
+RUN apk add mariadb-client 
+RUN apk add openssh-client 
+RUN apk add openssl
+RUN apk add php7-bcmath
+RUN apk add php7-ctype
+RUN apk add php7-curl
+RUN apk add php7-dom
+RUN apk add php7-gd
+RUN apk add php7-gettext
+RUN apk add php7-iconv
+RUN apk add php7-intl
+RUN apk add php7-json
+RUN apk add php7-mbstring
+RUN apk add php7-mcrypt
+RUN apk add php7-phar
+RUN apk add php7-session
+RUN apk add php7-simplexml 
+RUN apk add php7-soap
+RUN apk add php7-tokenizer 
+RUN apk add php7-xml
+RUN apk add php7-xmlreader 
+RUN apk add php7-xmlwriter 
+RUN apk add php7-zip
+RUN apk add php7-zlib
+RUN apk add php7-redis
+RUN apk add php7-xdebug
+RUN apk add php7-pgsql
+RUN apk add php7-pdo_pgsql
 
 COPY ./.docker/php/www.conf /etc/php/7.3/php-fpm.d/
 

@@ -4,7 +4,6 @@ services:
     image: code.putech.ir:5000/chiro-server:latest
     command: ["sh", "/app/startup.sh"]
     environment:
-      - CFG_MYSQL_HOST=db
       - DB_CONNECTION=pgsql
       - DB_HOST=db
       - DB_PORT=5432
