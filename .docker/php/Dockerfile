@@ -33,5 +33,6 @@ RUN apk add php7-redis
 RUN apk add php7-xdebug
 RUN apk add php7-pgsql
 RUN apk add php7-pdo_pgsql
+RUN apk add php7-fileinfo
 
 COPY ./www.conf /etc/php/7.3/php-fpm.d/

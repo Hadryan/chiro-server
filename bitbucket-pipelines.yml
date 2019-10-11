@@ -23,6 +23,14 @@ pipelines:
           - vendor
         script:
           - composer install
+          - export DB_CONNECTION=pgsql
+          - export DB_HOST=localhost
+          - export DB_PORT=5432
+          - export DB_DATABASE=default
+          - export DB_USERNAME=default
+          - export DB_PASSWORD=123456
+          - cp .env.example .env
+          - php artisan key:generate
           - php artisan migrate --seed
           - ./vendor/bin/phpunit
           - docker build -t $API_IMAGE_NAME .
