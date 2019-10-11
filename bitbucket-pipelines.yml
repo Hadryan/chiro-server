@@ -1,5 +1,5 @@
 image: code.putech.ir:5000/chiro-base-api
-defeinitions:
+definitions:
   services:
     redis:
       image: redis
@@ -7,7 +7,7 @@ defeinitions:
       image: postgres
       variables:
         POSTGRES_USER: default
-        POSTGRES_PASSWORD: 123456
+        POSTGRES_PASSWORD: "123456"
         POSTGRES_DB: default
   caches:
     vendor: vendor
