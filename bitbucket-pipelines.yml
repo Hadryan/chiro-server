@@ -7,4 +7,4 @@ pipelines:
           - docker
         script:
           - docker build -t $API_IMAGE_NAME:$BITBUCKET_COMMIT .
-          - docker push $API_IMAGE_NAME$API_IMAGE_NAME:$BITBUCKET_COMMIT
+          - docker push $API_IMAGE_NAME:$BITBUCKET_COMMIT
