@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function single($id)
     {
-        $product = Product::with('images')->find($id);
+        $product = Product::with(['images', 'categories'])->find($id);
 
         return $this->respond($product);
     }

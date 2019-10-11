@@ -34,4 +34,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Model\ProductImage')->select(['product_id', 'path']);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Model\Category');
+    }
 }

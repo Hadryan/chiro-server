@@ -10,12 +10,19 @@ class ProductControllerTest extends TestCase
     public function testListProducts()
     {
 
-        $products = Product::paginate()->items();
-
         $response = $this->get('/api/v1/products');
 
         $response->assertOk();
-        $response->assertJsonCount(count($products));
+        $response->assertJsonStructure([
+            [
+                'id',
+                'name',
+                'price',
+                'discount',
+                'properties',
+                'image'
+            ]
+        ]);
     }
 
     public function testSingleProduct()
@@ -29,6 +36,8 @@ class ProductControllerTest extends TestCase
             'price',
             'discount',
             'properties',
+            'images',
+            'categories',
         ]);
     }
 
