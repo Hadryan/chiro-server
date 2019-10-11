@@ -1,10 +1,29 @@
-image: atlassian/default-image:2
+image: code.putech.ir:5000/chiro-base-api
+defeinitions:
+  services:
+    redis:
+      image: redis
+    postgres:
+      image: postgres
+      variables:
+        POSTGRES_USER: default
+        POSTGRES_PASSWORD: 123456
+        POSTGRES_DB: default
+  caches:
+    vendor: vendor
 
 pipelines:
   default:
     - step:
         services:
           - docker
+          - redis
+          - postgres
+        caches:
+          - vendor
         script:
-          - docker build -t $API_IMAGE_NAME:$BITBUCKET_COMMIT .
-          - docker push $API_IMAGE_NAME:$BITBUCKET_COMMIT
+          - composer install
+          - php artisan migrate --seed
+          - ./vendor/bin/phpunit
+          - docker build -t $API_IMAGE_NAME .
+          - docker push $API_IMAGE_NAME
