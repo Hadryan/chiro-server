@@ -10,7 +10,7 @@ definitions:
         POSTGRES_PASSWORD: "123456"
         POSTGRES_DB: default
   caches:
-    vendor: vendor
+    vendor: /app/vendor
 
 pipelines:
   default:
