@@ -10,7 +10,7 @@ class SmsBase
     protected $guzzle;
     public function __construct($baseUrl)
     {
-        $this->guzzle = new \GuzzleHttp\Client([
+        $this->guzzle = app(\GuzzleHttp\Client::class, [
             'base_uri' => $baseUrl,
             'allow_redirects' => true,
             'timeout' => 3,

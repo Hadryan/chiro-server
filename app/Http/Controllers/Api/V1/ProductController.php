@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\Controller;
 use App\Model\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -18,5 +19,18 @@ class ProductController extends Controller
         $product = Product::with(['images', 'categories'])->find($id);
 
         return $this->respond($product);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'discount' => 'numeric'
+        ]);
+        $product = Product::create($request->all());
+
+        return $this->respond($product, 201);
     }
 }

@@ -4,9 +4,18 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Model\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductControllerTest extends TestCase
 {
+
+    // use RefreshDatabase;
+
+    // protected function setUp(): void
+    // {
+    //     parent::setUp();
+    //     $this->seed();
+    // }
     public function testListProducts()
     {
 
@@ -20,7 +29,7 @@ class ProductControllerTest extends TestCase
                 'price',
                 'discount',
                 'properties',
-                'image'
+                'image_url'
             ]
         ]);
     }
@@ -46,5 +55,20 @@ class ProductControllerTest extends TestCase
         $response = $this->get('/api/v1/products/wrongId');
 
         $response->assertNotFound();
+    }
+
+    public function testStoreProduct()
+    {
+        $response = $this->post('/api/v1/products', [
+            'name' => 'Test Product',
+            'description' => 'Test description',
+            'price' => 1000,
+        ]);
+
+        $response->assertStatus(201);
+        // $body = json_decode($response->getBody());
+        $this->assertDatabaseHas('products', [
+            'name' => 'Test Product'
+        ]);
     }
 }

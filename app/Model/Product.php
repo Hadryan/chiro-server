@@ -21,6 +21,9 @@ class Product extends Model
     public function getImageUrlAttribute()
     {
         $image = $this->image()->get();
+        if ($image->isEmpty()) {
+            return null;
+        }
         return $image[0]->path;
     }
 

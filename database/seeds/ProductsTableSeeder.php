@@ -11,11 +11,11 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Model\Product::class, 20)->create()->each(function ($product) {
+        factory(App\Model\Product::class, 10)->create()->each(function ($product) {
             $product->images()->save(factory(App\Model\ProductImage::class)->make());
         });
 
-        factory(App\Model\Category::class, 20)->create();
+        factory(App\Model\Category::class, 5)->create();
 
         $categories = App\Model\Category::all();
 

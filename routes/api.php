@@ -23,6 +23,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
 
     Route::get('products', 'ProductController@index');
     Route::get('products/{id}', 'ProductController@single')->where('id', '[0-9]+');
+    Route::post('products', 'ProductController@store');
 
     Route::get('categories', 'CategoryController@index');
 });
