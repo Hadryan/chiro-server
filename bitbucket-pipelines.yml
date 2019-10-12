@@ -23,7 +23,6 @@ pipelines:
     - step:
         name: test
         services:
-          - docker
           - redis
           - postgres
         caches:
@@ -41,6 +40,8 @@ pipelines:
           - ./vendor/bin/phpunit
     - step:
         name: build
+        services:
+          - docker
         caches:
           - laravel
         script:
