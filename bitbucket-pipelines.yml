@@ -10,19 +10,27 @@ definitions:
         POSTGRES_PASSWORD: "123456"
         POSTGRES_DB: default
   caches:
-    vendor: /app/vendor
+    laravel: vendor
 
 pipelines:
   default:
     - step:
+        name: prepare
+        caches:
+          - laravel
+        script:
+          - composer install
+          - docker build -t $API_IMAGE_NAME .
+          - docker push $API_IMAGE_NAME
+    - step:
+        name: test
         services:
           - docker
           - redis
           - postgres
         caches:
-          - vendor
+          - laravel
         script:
-          - composer install
           - export DB_CONNECTION=pgsql
           - export DB_HOST=localhost
           - export DB_PORT=5432
@@ -33,5 +41,10 @@ pipelines:
           - php artisan key:generate
           - php artisan migrate --seed
           - ./vendor/bin/phpunit
+    - step:
+        name: build
+        caches:
+          - laravel
+        script:
           - docker build -t $API_IMAGE_NAME .
           - docker push $API_IMAGE_NAME
