@@ -16,6 +16,14 @@ class Product extends Model
 {
     protected $fillable = ['name', 'description', 'properties', 'price', 'discount'];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        $image = $this->image()->get();
+        return $image[0]->path;
+    }
+
     public function getPropertiesAttribute()
     {
         $data = json_decode($this->attributes['properties'], true);
