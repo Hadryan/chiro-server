@@ -20,8 +20,6 @@ pipelines:
           - laravel
         script:
           - composer install
-          - docker build -t $API_IMAGE_NAME .
-          - docker push $API_IMAGE_NAME
     - step:
         name: test
         services:
