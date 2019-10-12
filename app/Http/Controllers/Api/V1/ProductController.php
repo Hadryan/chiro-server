@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('image')->paginate();
+        $products = Product::with(['image', 'categories'])->paginate();
         return $this->respond($products->items());
     }
 

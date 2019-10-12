@@ -16,6 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+
         return $this->respond($categories);
     }
 
