@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(ProductImage::class, function (Faker $faker) {
     return [
-        'path' => public_relative_path($faker->image(public_path('images/products')))
+        'path' => random_mock_image()
     ];
 });
