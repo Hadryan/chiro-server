@@ -5,17 +5,13 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Model\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use \Illuminate\Http\UploadedFile;
 
 class ProductControllerTest extends TestCase
 {
 
     // use RefreshDatabase;
 
-    // protected function setUp(): void
-    // {
-    //     parent::setUp();
-    //     $this->seed();
-    // }
     public function testListProducts()
     {
 
@@ -69,6 +65,27 @@ class ProductControllerTest extends TestCase
         // $body = json_decode($response->getBody());
         $this->assertDatabaseHas('products', [
             'name' => 'Test Product'
+        ]);
+    }
+
+    public function testStoreProductWithImage()
+    {
+        $response = $this->post('/api/v1/products', [
+            'name' => 'Test Product',
+            'description' => 'Test description',
+            'price' => 1000,
+            'image' => UploadedFile::fake()->image("image.png", 200, 200),
+        ], [
+            'Accept' => 'application/json'
+        ]);
+
+        $response->assertStatus(201);
+
+        $response->assertJsonStructure([
+            'name',
+            'description',
+            'price',
+            'image_url'
         ]);
     }
 }

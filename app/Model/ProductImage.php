@@ -17,4 +17,9 @@ class ProductImage extends Model
     {
         return url($this->attributes['path']);
     }
+
+    public function products()
+    {
+        return $this->belongsTo('App\Model\Product');
+    }
 }
