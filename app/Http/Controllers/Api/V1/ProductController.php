@@ -48,4 +48,23 @@ class ProductController extends Controller
 
         return $this->respond($product, 201);
     }
+
+    public function search(Request $request)
+    {
+
+        $search = $request->input('query');
+
+        $search = explode(' ', $search);
+
+        $query = (new Product())->newQuery();
+
+        foreach ($search as $s) {
+            $query = $query->orWhere('name', 'like', sprintf('%%%s%%', $s));
+            $query = $query->orWhere('description', 'like', sprintf('%%%s%%', $s));
+        }
+
+        $result = $query->get();
+
+        return $this->respond($result);
+    }
 }

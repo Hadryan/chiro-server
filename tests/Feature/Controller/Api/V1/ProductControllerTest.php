@@ -88,4 +88,30 @@ class ProductControllerTest extends TestCase
             'image_url'
         ]);
     }
+
+    public function testProductSearch()
+    {
+        $products = Product::limit(3)->orderBy('created_at', 'ASC')->get();
+
+        $query = '';
+
+        $products->each(function ($product) use (&$query) {
+            $query .= $product->name . ' ';
+        });
+
+        // dd($query);
+
+        $response = $this->get('/api/v1/products/search?query=' . $query, ['Accept' => 'application/json']);
+
+        $response->assertOk();
+
+        $items = $response->getContent();
+
+        $response->assertJsonStructure([[
+            'name',
+            'description',
+            'price',
+            'image_url'
+        ]]);
+    }
 }

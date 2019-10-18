@@ -21,6 +21,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::post('auth/request', 'AuthController@request');
     Route::post('auth/verify', 'AuthController@verify');
 
+    Route::get('products/search', 'ProductController@search');
     Route::get('products', 'ProductController@index');
     Route::get('products/{id}', 'ProductController@single')->where('id', '[0-9]+');
     Route::post('products', 'ProductController@store');
