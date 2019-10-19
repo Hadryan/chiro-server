@@ -23,9 +23,9 @@ class ProductRepository implements ProductRepositoryInterface
         return $product;
     }
 
-    public function get(int $id): Product
+    public function get(int $id, $with = ['images', 'categories']): Product
     {
-        return Product::findOrFail($id);
+        return Product::with($with)->findOrFail($id);
     }
 
     public function all(): array

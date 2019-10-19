@@ -21,7 +21,7 @@ interface ProductRepositoryInterface
      * @return Product
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function get(int $id): Product;
+    public function get(int $id, array $with): Product;
 
     /**
      * retrieves all products from the underlying database

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\Controller;
 use App\Model\Product;
-use App\Model\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +18,7 @@ class ProductController extends Controller
 
     public function single($id)
     {
-        $product = Product::with(['images', 'categories'])->find($id);
+        $product = app('products')->get($id);
 
         return $this->respond($product);
     }
