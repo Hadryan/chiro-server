@@ -34,17 +34,12 @@ class ProductController extends Controller
             'image' => [Rule::dimensions()->maxWidth(500)->maxHeight(500)->minHeight(100)->minWidth(100)]
         ]);
 
-        $product = Product::create($request->all());
 
         if ($request->has('image')) {
-            $image = $request->file('image')->store('images/products', 'public');
-
-            $productImage = ProductImage::create([
-                'path' => $image
-            ]);
-
-            $product->images()->save($productImage);
+            $imagePath = $request->file('image')->store('images/products', 'public');
         }
+
+        $product = app('products')->insert($request->all(), @$imagePath);
 
         return $this->respond($product, 201);
     }
@@ -56,14 +51,7 @@ class ProductController extends Controller
 
         $search = explode(' ', $search);
 
-        $query = (new Product())->newQuery();
-
-        foreach ($search as $s) {
-            $query = $query->orWhere('name', 'like', sprintf('%%%s%%', $s));
-            $query = $query->orWhere('description', 'like', sprintf('%%%s%%', $s));
-        }
-
-        $result = $query->get();
+        $result = app('products')->search($search);
 
         return $this->respond($result);
     }
