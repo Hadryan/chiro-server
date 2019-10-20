@@ -38,12 +38,14 @@ pipelines:
           - php artisan key:generate
           - php artisan migrate --seed
           - ./vendor/bin/phpunit --testdox
-    - step:
-        name: build
-        services:
-          - docker
-        caches:
-          - laravel
-        script:
-          - docker build -t $API_IMAGE_NAME .
-          - docker push $API_IMAGE_NAME
+  branches:
+    master:        
+      - step:
+          name: build
+          services:
+            - docker
+          caches:
+            - laravel
+          script:
+            - docker build -t $API_IMAGE_NAME .
+            - docker push $API_IMAGE_NAME
