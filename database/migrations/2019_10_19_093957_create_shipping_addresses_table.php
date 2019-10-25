@@ -15,8 +15,14 @@ class CreateShippingAddressesTable extends Migration
     {
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
             $table->string('name');
-            $table->timestamps();
+            $table->integer('city_id');
+            $table->string('address');
+            $table->point('location');
+
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
