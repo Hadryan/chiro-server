@@ -33,5 +33,5 @@ interface ShippingAddressRepositoryInterface
      * @param int $userId
      * @return Collection of @var ShippingAddress
      */
-    public function getAddressesForUser($userId): Collection;
+    public function getAddressesForUser(int $userId): Collection;
 }

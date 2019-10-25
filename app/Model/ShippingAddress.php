@@ -8,7 +8,7 @@ class ShippingAddress extends Model
 {
     protected $fillable = ['name', 'user_id', 'city_id', 'location', 'address'];
 
-    protected $timestamps =  false;
+    public $timestamps =  false;
 
     public function user()
     {

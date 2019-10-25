@@ -10,5 +10,10 @@ class City extends Model
 
     protected $fillable = ['name', 'parent_id', 'area'];
 
-    protected $timestamps = false;
+    public $timestamps = false;
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Model\City', 'parent_id');
+    }
 }

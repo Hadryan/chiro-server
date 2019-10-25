@@ -17,7 +17,7 @@ class CreateCitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('parent_id')->nullable();
-            $table->polygon('area')->nullable();
+            // $table->polygon('area')->nullable();
 
             $table->foreign('parent_id')->references('id')->on('cities')->onDelete('set null');
         });

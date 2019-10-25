@@ -19,7 +19,8 @@ class CreateShippingAddressesTable extends Migration
             $table->string('name');
             $table->integer('city_id');
             $table->string('address');
-            $table->point('location');
+            $table->float('lat', 8, 10)->nullable();
+            $table->float('lng', 8, 10)->nullable();
 
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

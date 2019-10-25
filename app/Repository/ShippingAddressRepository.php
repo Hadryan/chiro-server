@@ -5,11 +5,21 @@ namespace App\Repository;
 use RuntimeException;
 use App\Model\ShippingAddress;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ShippingAddressRepository implements ShippingAddressRepositoryInterface
 {
+
+    const RULES = [
+        'name' => 'required',
+        'address' => 'required',
+        'city_id' => 'required|numeric',
+        'lat' => 'float',
+        'lng' => 'float',
+    ];
+
     /**
      * inserts a shipping address into the database
      * @param array|ShippingAddress $data
@@ -24,6 +34,15 @@ class ShippingAddressRepository implements ShippingAddressRepositoryInterface
             $data->save();
             return $data;
         } else if (is_array($data)) {
+
+            $validator = Validator::make($data, self::RULES);
+
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+
+            $data['user_id'] = $userId;
+
             return ShippingAddress::create($data);
         }
 
