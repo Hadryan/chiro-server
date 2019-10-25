@@ -34,4 +34,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [];
+
+    public function shippingAddresses()
+    {
+        return $this->hasMany('App\Model\ShippingAddress');
+    }
 }
