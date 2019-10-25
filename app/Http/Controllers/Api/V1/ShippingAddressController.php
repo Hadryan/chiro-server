@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ShippingAddress;
+use App\Model\ShippingAddress;
 use Illuminate\Http\Request;
 
 class ShippingAddressController extends Controller
