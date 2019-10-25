@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
         // products
         $this->app->singleton(\App\Repository\ProductRepositoryInterface::class, \App\Repository\ProductRepository::class);
         $this->app->alias(\App\Repository\ProductRepositoryInterface::class, 'products');
+
+        // shipping addresses
+        $this->app->singleton(\App\Repository\ShippingAddressRepositoryInterface::class, \App\Repository\ShippingAddressRepository::class);
+        $this->app->alias(\App\Repository\ShippingAddressRepositoryInterface::class, 'shippingAddresses');
     }
 
     /**
