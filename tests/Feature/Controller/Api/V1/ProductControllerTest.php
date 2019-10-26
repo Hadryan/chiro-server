@@ -10,10 +10,11 @@ use \Illuminate\Http\UploadedFile;
 class ProductControllerTest extends TestCase
 {
 
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     public function testListProducts()
     {
+        $this->seed();
 
         $response = $this->get('/api/v1/products');
 
@@ -32,6 +33,8 @@ class ProductControllerTest extends TestCase
 
     public function testSingleProduct()
     {
+        $this->seed();
+
         $response = $this->get('/api/v1/products/1');
 
         $response->assertOk();
@@ -48,6 +51,7 @@ class ProductControllerTest extends TestCase
 
     public function testSignleProductInvalidId()
     {
+
         $response = $this->get('/api/v1/products/wrongId');
 
         $response->assertNotFound();
@@ -55,6 +59,9 @@ class ProductControllerTest extends TestCase
 
     public function testStoreProduct()
     {
+
+        $this->seed();
+
         $response = $this->post('/api/v1/products', [
             'name' => 'Test Product',
             'description' => 'Test description',
@@ -62,7 +69,7 @@ class ProductControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        // $body = json_decode($response->getBody());
+
         $this->assertDatabaseHas('products', [
             'name' => 'Test Product'
         ]);
@@ -70,6 +77,8 @@ class ProductControllerTest extends TestCase
 
     public function testStoreProductWithImage()
     {
+        $this->seed();
+
         $response = $this->post('/api/v1/products', [
             'name' => 'Test Product',
             'description' => 'Test description',
@@ -91,6 +100,8 @@ class ProductControllerTest extends TestCase
 
     public function testProductSearch()
     {
+        $this->seed();
+
         $products = Product::limit(3)->orderBy('created_at', 'ASC')->get();
 
         $query = '';
@@ -98,8 +109,6 @@ class ProductControllerTest extends TestCase
         $products->each(function ($product) use (&$query) {
             $query .= $product->name . ' ';
         });
-
-        // dd($query);
 
         $response = $this->get('/api/v1/products/search?query=' . $query, ['Accept' => 'application/json']);
 
