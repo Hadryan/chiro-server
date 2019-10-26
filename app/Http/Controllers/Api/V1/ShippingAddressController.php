@@ -14,7 +14,7 @@ class ShippingAddressController extends Controller
      */
     public function index()
     {
-        //
+        return $this->respond(ShippingAddress::paginate());
     }
 
     /**
