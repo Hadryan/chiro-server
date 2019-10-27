@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Order;
 use Illuminate\Http\Request;
-use App\Model\ShippingAddress;
 use App\Http\Controllers\Api\Controller;
 
-class ShippingAddressController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ShippingAddressController extends Controller
      */
     public function index()
     {
-        return $this->respond(ShippingAddress::paginate());
+        //
     }
 
     /**
@@ -42,10 +42,10 @@ class ShippingAddressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ShippingAddress  $shippingAddress
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(ShippingAddress $shippingAddress)
+    public function show(Order $order)
     {
         //
     }
@@ -53,10 +53,10 @@ class ShippingAddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ShippingAddress  $shippingAddress
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(ShippingAddress $shippingAddress)
+    public function edit(Order $order)
     {
         //
     }
@@ -65,10 +65,10 @@ class ShippingAddressController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ShippingAddress  $shippingAddress
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ShippingAddress $shippingAddress)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -76,10 +76,10 @@ class ShippingAddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ShippingAddress  $shippingAddress
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShippingAddress $shippingAddress)
+    public function destroy(Order $order)
     {
         //
     }
