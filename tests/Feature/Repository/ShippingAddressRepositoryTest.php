@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\City;
+use App\Model\User;
 use Tests\TestCase;
 use App\Model\ShippingAddress;
 use Illuminate\Validation\ValidationException;
@@ -20,11 +22,15 @@ class ShippingAddressRepositoryTest extends TestCase
     {
         $this->seed();
 
+        $c = City::first();
+        $u = User::first();
+
+
         app('shippingAddresses')->insert([
             'name' => 'My Home',
             'address' => '123 Main St',
-            'city_id' => 1,
-        ], 1);
+            'city_id' => $c->id,
+        ], $u->id);
 
         $this->assertDatabaseHas('shipping_addresses', [
             'name' => 'My Home',
@@ -35,11 +41,15 @@ class ShippingAddressRepositoryTest extends TestCase
     {
         $this->seed();
 
+        $c = City::first();
+        $u = User::first();
+
+
         $shippingAddress = app('shippingAddresses')->insert([
             'name' => 'My Home',
             'address' => '123 Main St',
-            'city_id' => 1,
-        ], 1);
+            'city_id' => $c->id,
+        ], $u->id);
 
         $sa = app('shippingAddresses')->get($shippingAddress->id);
 

@@ -35,7 +35,9 @@ class ProductControllerTest extends TestCase
     {
         $this->seed();
 
-        $response = $this->get('/api/v1/products/1');
+        // dd(Product::all());
+
+        $response = $this->get('/api/v1/products/20');
 
         $response->assertOk();
         $response->assertJsonStructure([
