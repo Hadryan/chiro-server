@@ -20,7 +20,6 @@ pipelines:
           - laravel
         script:
           - composer install
-          - composer dump-autoload
     - step:
         name: test
         services:
@@ -31,11 +30,12 @@ pipelines:
         script:
           - export DB_CONNECTION=pgsql
           - export DB_HOST=localhost
-          - export DB_PORT=5c432
+          - export DB_PORT=5432
           - export DB_DATABASE=default
           - export DB_USERNAME=default
           - export DB_PASSWORD=123456
           - cp .env.example .env
+          - composer dump-autoload
           - php artisan key:generate
           - php artisan migrate --seed
           - ./vendor/bin/phpunit --testdox
