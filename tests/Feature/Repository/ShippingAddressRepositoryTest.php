@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ShippingAddressRepositoryTest extends TestCase
 {
-    use RefreshDatabase;
 
     public function testInsertException()
     {
@@ -20,7 +19,6 @@ class ShippingAddressRepositoryTest extends TestCase
 
     public function testInsert()
     {
-        $this->seed();
 
         $c = City::first();
         $u = User::first();
@@ -39,7 +37,6 @@ class ShippingAddressRepositoryTest extends TestCase
 
     public function testGet()
     {
-        $this->seed();
 
         $c = City::first();
         $u = User::first();
@@ -61,12 +58,11 @@ class ShippingAddressRepositoryTest extends TestCase
 
         $this->expectException(ModelNotFoundException::class);
 
-        app('shippingAddresses')->get(1);
+        app('shippingAddresses')->get(45435);
     }
 
     public function testGetAddressesForUser()
     {
-        $this->seed();
 
         $adrss = ShippingAddress::where('user_id', 1)->get();
 

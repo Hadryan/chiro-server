@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShippingAddress extends Model
 {
-    protected $fillable = ['name', 'user_id', 'city_id', 'location', 'address'];
+    protected $fillable = ['name', 'user_id', 'city_id', 'lat', 'lng', 'address'];
 
     public $timestamps =  false;
 

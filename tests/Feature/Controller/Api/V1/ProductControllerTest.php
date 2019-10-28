@@ -10,7 +10,6 @@ use \Illuminate\Http\UploadedFile;
 class ProductControllerTest extends TestCase
 {
 
-    use RefreshDatabase;
 
     public function testListProducts()
     {
@@ -33,9 +32,6 @@ class ProductControllerTest extends TestCase
 
     public function testSingleProduct()
     {
-        $this->seed();
-
-        // dd(Product::all());
 
         $response = $this->get('/api/v1/products/20');
 
@@ -62,7 +58,6 @@ class ProductControllerTest extends TestCase
     public function testStoreProduct()
     {
 
-        $this->seed();
 
         $response = $this->post('/api/v1/products', [
             'name' => 'Test Product',
@@ -79,7 +74,6 @@ class ProductControllerTest extends TestCase
 
     public function testStoreProductWithImage()
     {
-        $this->seed();
 
         $response = $this->post('/api/v1/products', [
             'name' => 'Test Product',
@@ -102,7 +96,6 @@ class ProductControllerTest extends TestCase
 
     public function testProductSearch()
     {
-        $this->seed();
 
         $products = Product::limit(3)->orderBy('created_at', 'ASC')->get();
 
