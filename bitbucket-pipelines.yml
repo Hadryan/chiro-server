@@ -31,7 +31,7 @@ pipelines:
         script:
           - export DB_CONNECTION=pgsql
           - export DB_HOST=localhost
-          - export DB_PORT=5c432
+          - export DB_PORT=5432
           - export DB_DATABASE=default
           - export DB_USERNAME=default
           - export DB_PASSWORD=123456
