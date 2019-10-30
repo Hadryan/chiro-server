@@ -7,8 +7,8 @@ class ProductRepositoryTest extends \Tests\TestCase
 
     public function testInsert()
     {
-        // $orders = Order::with(['products'])->get()->toArray();
+        $orders = Order::with(['products'])->get()->toArray();
 
-        // dd($orders);
+        dd($orders);
     }
 }

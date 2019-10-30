@@ -20,6 +20,6 @@ class Order extends Model
      */
     public function products()
     {
-        return $this->hasManyThrough('App\Model\Product', 'App\Model\OrderProduct', 'order_id', 'product_id', 'id', 'id');
+        return $this->belongsToMany('App\Model\Product', 'App\Model\OrderProduct')->withPivot('quantity', 'unit_price');
     }
 }
