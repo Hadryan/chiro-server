@@ -3,6 +3,7 @@
 namespace App\Services\SMS;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 class SmsBase
 {
@@ -13,7 +14,7 @@ class SmsBase
 
     public function __construct($baseUrl)
     {
-        $this->guzzle = new Client([
+        $this->guzzle = app(ClientInterface::class, [
             'base_uri' => $baseUrl,
             'allow_redirects' => true,
             'timeout' => 3,

@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
         // shipping addresses
         $this->app->singleton(\App\Repository\ShippingAddressRepositoryInterface::class, \App\Repository\ShippingAddressRepository::class);
         $this->app->alias(\App\Repository\ShippingAddressRepositoryInterface::class, 'shippingAddresses');
+
+        $this->app->bind(\GuzzleHttp\ClientInterface::class, function ($app, $params) {
+            return new \GuzzleHttp\Client($params);
+        });
     }
 
     /**
