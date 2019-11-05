@@ -1,14 +1,35 @@
 <?php
 
 use App\Model\Order;
+use App\Model\ProductProperties;
+use App\Repository\ProductRepository;
 
 class ProductRepositoryTest extends \Tests\TestCase
 {
 
+    /** @var ProductRepository */
+    private $repository;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = new ProductRepository();
+    }
     public function testInsert()
     {
-        $orders = Order::with(['products'])->get()->toArray();
+        $product = $this->repository->insert([
+            'name' => 'My Product',
+            'description' => 'this is my product',
+            'properties' => new ProductProperties([
+                'size' => 'xxl',
+                'type' => 'sports'
+            ]),
+            'price' => 10000,
+            'discount' => 10
+        ], 'fake/image/path.png');
 
-        dd($orders);
+        $this->assertDatabaseHas('products', [
+            'id' => $product->id
+        ]);
     }
 }
