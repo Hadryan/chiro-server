@@ -7,10 +7,10 @@ class Bitel extends SmsBase implements SmsInterface
 
     public function __construct()
     {
-        parent::__construct('https://api.bitel.rest');
+        parent::__construct('https://api.bitel.rest/');
     }
 
-    public function sendCodeBySms(string $phone, string $code): bool
+    public function sendOtp(string $phone, string $code): string
     {
         try {
             $this->guzzle->post('api/v2/sms/otp', [
@@ -23,9 +23,9 @@ class Bitel extends SmsBase implements SmsInterface
                 ]
             ]);
         } catch (\Exception $e) {
-            \Log::error($e);
-            return false;
+            \Log::error("failed sending request to Bitel", ['original' => $e]);
+            throw new SmsException($e->getMessage());
         }
-        return true;
+        return $code;
     }
 }

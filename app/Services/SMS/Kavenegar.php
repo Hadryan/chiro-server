@@ -20,13 +20,13 @@ class Kavenegar extends SmsBase implements SmsInterface
                 'query' => [
                     'token' => $code,
                     'receptor' => $this->normalizePhoneNumber($phone),
-                    'template' => 'nlp-verify'
+                    'template' => config('sms_providers.providers.kavenegar.auth_template')
                 ]
             ]);
         } catch (\Exception $e) {
-            \Log::error($e);
-            throw $e;
+            \Log::error("failed sending request to Kavenegar", ['original' => $e]);
+            throw new SmsException($e->getMessage());
         }
-        return (string) $code;
+        return $code;
     }
 }
