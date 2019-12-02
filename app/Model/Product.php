@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    protected $fillable = ['name', 'description', 'properties', 'price', 'discount'];
+    protected $fillable = ['name', 'description', 'properties', 'price', 'discount', 'parent_id'];
 
     protected $appends = ['image_url'];
 
@@ -54,5 +54,10 @@ class Product extends Model
     public function order()
     {
         return $this->belongsToMany('App\Model\Order', 'App\Model\OrderProduct');
+    }
+
+    public function children()
+    {
+        return $this->hasMany('App\Model\Product', 'parent_id', 'id');
     }
 }

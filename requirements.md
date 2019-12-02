@@ -1,0 +1,12 @@
+- index page
+    - slider
+    - categories must have types so that they can distinguished form tags
+- user favorites
+- payment methods (zarinpal)
+- save order details
+- time periods for sending order
+- shipping address endpoints
+- order history
+- finalize order and proceed to payment
+- user update
+- product and supproducts
