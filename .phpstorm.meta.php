@@ -5,13 +5,15 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2019-10-04 18:39:25.
+    * Generated on 2019-12-03 09:15:04.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -20,6 +22,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -78,6 +81,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -126,7 +130,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -167,6 +171,8 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -175,6 +181,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -233,6 +240,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -281,7 +289,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -322,6 +330,8 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -330,6 +340,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -388,6 +399,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -436,7 +448,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -477,6 +489,8 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -485,6 +499,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -543,6 +558,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -591,7 +607,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -632,6 +648,8 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -640,6 +658,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -698,6 +717,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -746,7 +766,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -787,6 +807,8 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -795,6 +817,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -853,6 +876,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -901,7 +925,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -942,6 +966,8 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -950,6 +976,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -1008,6 +1035,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -1056,7 +1084,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -1097,6 +1125,8 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'App\Repository\ProductRepositoryInterface' => \App\Repository\ProductRepository::class,
+        'App\Repository\ShippingAddressRepositoryInterface' => \App\Repository\ShippingAddressRepository::class,
         'App\Services\JWT\JWTServiceInterface' => \App\Services\JWT\JWTService::class,
         'App\Services\SMS\SmsInterface' => \App\Services\SMS\Kavenegar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
@@ -1105,6 +1135,7 @@ namespace PHPSTORM_META {
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'GuzzleHttp\ClientInterface' => \GuzzleHttp\Client::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -1163,6 +1194,7 @@ namespace PHPSTORM_META {
         'command.l5-swagger.generate' => \L5Swagger\Console\GenerateDocsCommand::class,
         'command.listener.make' => \Illuminate\Foundation\Console\ListenerMakeCommand::class,
         'command.mail.make' => \Illuminate\Foundation\Console\MailMakeCommand::class,
+        'command.make:solution' => \Facade\Ignition\Commands\SolutionMakeCommand::class,
         'command.middleware.make' => \Illuminate\Routing\Console\MiddlewareMakeCommand::class,
         'command.migrate' => \Illuminate\Database\Console\Migrations\MigrateCommand::class,
         'command.migrate.fresh' => \Illuminate\Database\Console\Migrations\FreshCommand::class,
@@ -1211,7 +1243,7 @@ namespace PHPSTORM_META {
         'composer' => \Illuminate\Support\Composer::class,
         'cookie' => \Illuminate\Cookie\CookieJar::class,
         'db' => \Illuminate\Database\DatabaseManager::class,
-        'db.connection' => \Illuminate\Database\MySqlConnection::class,
+        'db.connection' => \Illuminate\Database\PostgresConnection::class,
         'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
         'encrypter' => \Illuminate\Encryption\Encrypter::class,
         'events' => \Illuminate\Events\Dispatcher::class,
@@ -1250,6 +1282,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
     ]));
+
 
     override(\Illuminate\Support\Arr::add(0), type(0));
     override(\Illuminate\Support\Arr::except(0), type(0));
