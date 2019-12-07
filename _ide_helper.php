@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 6.6.0 on 2019-12-03 09:18:12.
+ * Generated for Laravel 6.6.2 on 2019-12-07 11:49:17.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -10774,20 +10774,6 @@ namespace Illuminate\Support\Facades {
     class Route {
         
         /**
-         * Register a new HEAD route with the router.
-         *
-         * @param string $uri
-         * @param \Closure|array|string|callable|null $action
-         * @return \Illuminate\Routing\Route 
-         * @static 
-         */ 
-        public static function head($uri, $action = null)
-        {
-                        /** @var \Illuminate\Routing\Router $instance */
-                        return $instance->head($uri, $action);
-        }
-        
-        /**
          * Register a new GET route with the router.
          *
          * @param string $uri
@@ -11764,6 +11750,30 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Database\Schema\PostgresBuilder $instance */
                         return $instance->getAllTables();
+        }
+        
+        /**
+         * Get all of the view names for the database.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAllViews()
+        {
+                        /** @var \Illuminate\Database\Schema\PostgresBuilder $instance */
+                        return $instance->getAllViews();
+        }
+        
+        /**
+         * Get all of the type names for the database.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAllTypes()
+        {
+                        /** @var \Illuminate\Database\Schema\PostgresBuilder $instance */
+                        return $instance->getAllTypes();
         }
         
         /**
@@ -15438,7 +15448,7 @@ namespace  {
             /**
              * Execute the query as a "select" statement.
              *
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Collection|static[] 
              * @static 
              */ 
@@ -15451,7 +15461,7 @@ namespace  {
             /**
              * Get the hydrated models without eager loading.
              *
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model[]|static[] 
              * @static 
              */ 
@@ -15823,7 +15833,7 @@ namespace  {
             /**
              * Execute the query and get the first result.
              *
-             * @param array $columns
+             * @param array|string $columns
              * @return \Illuminate\Database\Eloquent\Model|object|static|null 
              * @static 
              */ 
