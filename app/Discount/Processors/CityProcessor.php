@@ -2,9 +2,11 @@
 
 namespace App\Discount\Processors;
 
+use App\Model\Order;
+use App\Model\Discount;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class CityProcessor implements Processor
+class CityProcessor implements ProcessorInterface
 {
     public function process(Order $order): bool
     {

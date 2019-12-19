@@ -21,7 +21,7 @@ class CreateDiscountsTable extends Migration
             $table->bigInteger('target_id')->nullable();
             $table->bigInteger('lower_limit')->nullable();
             $table->bigInteger('amount');
-            $table->boolean('exclusive');
+            $table->boolean('exclusive')->default(false);
             $table->text('description')->nullable();
 
             $table->timestamps();
