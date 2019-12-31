@@ -17,6 +17,7 @@ class CreateCategoryProductTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('category_id');
             $table->bigInteger('product_id');
+            $table->enum('type', ['category', 'tag']);
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
