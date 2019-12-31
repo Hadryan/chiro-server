@@ -12,4 +12,9 @@ class Category extends Model
     {
         return url($this->attributes['image_path']);
     }
+
+    public function products()
+    {
+        return $this->hasMany('App\Model\Product');
+    }
 }

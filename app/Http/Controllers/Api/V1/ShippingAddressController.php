@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\ShippingAddress;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Controller;
 
 class ShippingAddressController extends Controller
@@ -15,7 +16,9 @@ class ShippingAddressController extends Controller
      */
     public function index()
     {
-        return $this->respond(ShippingAddress::paginate());
+        return $this->respond(ShippingAddress::where([
+            'user_id' => Auth::user()->id
+        ])->paginate());
     }
 
     /**
@@ -36,7 +39,21 @@ class ShippingAddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'city_id' => 'required|numeric',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+            'address' => 'required'
+        ]);
+
+        $data = $request->all();
+
+        $data['user_id'] = Auth::user()->id;
+
+        $address = ShippingAddress::create($data);
+
+        return $this->response($address);
     }
 
     /**
@@ -47,7 +64,7 @@ class ShippingAddressController extends Controller
      */
     public function show(ShippingAddress $shippingAddress)
     {
-        //
+        return $this->respond($shippingAddress);
     }
 
     /**

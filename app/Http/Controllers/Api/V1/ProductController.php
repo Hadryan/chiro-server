@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Api\Controller;
 use App\Model\Product;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Api\Controller;
 
 
 class ProductController extends Controller
@@ -53,5 +54,12 @@ class ProductController extends Controller
         $result = app('products')->search($search);
 
         return $this->respond($result);
+    }
+
+    public function productsByCategory($id)
+    {
+        $products = Category::find($id)->products();
+
+        return $this->respond($products);
     }
 }
