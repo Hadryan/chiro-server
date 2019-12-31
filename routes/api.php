@@ -27,4 +27,5 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::post('products', 'ProductController@store');
 
     Route::get('categories', 'CategoryController@index');
+    Route::get('slides', 'SlidesController@index');
 });
