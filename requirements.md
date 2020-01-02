@@ -1,5 +1,5 @@
 - index page
-    - slider
+    - slider -d
     - categories must have types so that they can distinguished form tags
 - user favorites
 - payment methods (zarinpal)

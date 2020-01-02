@@ -29,7 +29,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::get('categories', 'CategoryController@index');
     Route::get('categories/{id}/products', 'ProductController@productsByCategory');
 
-    Route::get('slides', 'SlidesController@index');
+    Route::get('slides', 'SlideController@index');
 
     Route::middleware('auth.jwt')->group(function () {
         Route::get('addresses', 'ShippingAddressController@index');

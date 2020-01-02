@@ -9,6 +9,7 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'description' => $faker->sentences(3, true),
-        'image_path' => random_mock_image()
+        'image_path' => random_mock_image(),
+        'type' => 'category',
     ];
 });
