@@ -40,9 +40,9 @@ class ShippingAddressController extends Controller
      */
     public function store(ShippingAddressRepository $repository, Request $request)
     {
-        $address = $repository->insert($request->all(), Auth::user()->id);
+        $address = $repository->insert($request->all(), auth('api')->id());
 
-        return $this->response($address);
+        return $this->respond($address, 201);
     }
 
     /**

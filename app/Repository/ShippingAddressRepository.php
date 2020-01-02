@@ -16,8 +16,8 @@ class ShippingAddressRepository implements ShippingAddressRepositoryInterface
         'name' => 'required',
         'address' => 'required',
         'city_id' => 'required|numeric',
-        'lat' => 'float',
-        'lng' => 'float',
+        'lat' => 'numeric',
+        'lng' => 'numeric',
     ];
 
     /**
