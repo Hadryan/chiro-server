@@ -31,7 +31,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
 
     Route::get('slides', 'SlideController@index');
 
-    Route::middleware('auth.jwt')->group(function () {
+    Route::middleware(['auth.jwt'])->group(function () {
         Route::get('addresses', 'ShippingAddressController@index');
         Route::post('addresses', 'ShippingAddressController@store');
     });

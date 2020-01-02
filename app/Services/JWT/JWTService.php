@@ -41,7 +41,7 @@ class JWTService implements JWTServiceInterface
             $token = (new Parser())->parse((string) $token);
             return $token->validate($data);
         } catch (\Exception $e) {
-            \Log::error($e);
+            // \Log::error($e);
             return false;
         }
     }

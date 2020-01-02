@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Model\ShippingAddress;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Api\Controller;
+use App\Repository\ShippingAddressRepository;
 
 class ShippingAddressController extends Controller
 {
@@ -17,8 +18,8 @@ class ShippingAddressController extends Controller
     public function index()
     {
         return $this->respond(ShippingAddress::where([
-            'user_id' => Auth::user()->id
-        ])->paginate());
+            'user_id' => auth('api')->id()
+        ])->get());
     }
 
     /**
@@ -37,21 +38,9 @@ class ShippingAddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShippingAddressRepository $repository, Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'city_id' => 'required|numeric',
-            'lat' => 'required|numeric',
-            'lng' => 'required|numeric',
-            'address' => 'required'
-        ]);
-
-        $data = $request->all();
-
-        $data['user_id'] = Auth::user()->id;
-
-        $address = ShippingAddress::create($data);
+        $address = $repository->insert($request->all(), Auth::user()->id);
 
         return $this->response($address);
     }

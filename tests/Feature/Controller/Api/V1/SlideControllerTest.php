@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class AuthControllerTest extends TestCase
+class SlideControllerTest extends TestCase
 {
     /**
      * @Test
