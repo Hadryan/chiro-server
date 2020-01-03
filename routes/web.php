@@ -18,3 +18,8 @@ Route::get('/', function () {
 Route::get('docs/api/schema.yaml', function () {
     return File::get(public_path('openapi.yaml'));
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
