@@ -12,7 +12,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.1
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8000
 components:
   schemas:
     User:
@@ -23,6 +23,19 @@ components:
         phone:
           type: string
         name:
+          type: string
+    Slide:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        alt:
+          type: string
+        target_url:
+          type: string
+        image_url:
           type: string
 paths:
   /api/v1/auth/request:
@@ -72,3 +85,15 @@ paths:
           description: the input phone number is invalid or nonexistent
         "401":
           description: the code is wrong
+  /api/v1/slides:
+    get:
+      description: Get a list of all available Slides
+      responses:
+        "200":
+          description: list of all slides
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Slide"
