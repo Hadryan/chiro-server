@@ -37,6 +37,44 @@ components:
           type: string
         image_url:
           type: string
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        image_path:
+          type: string
+        type:
+          type: string
+        parent_id:
+          type: integer
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          properties:
+            size:
+              type: string
+            color:
+              type: string
+        parent_id:
+          type: integer
+        price:
+          type: integer
+        discount:
+          type: integer
+
 paths:
   /api/v1/auth/request:
     post:
@@ -53,9 +91,9 @@ paths:
               required:
                 - phone
       responses:
-        "200":
+        200:
           description: the phone number was accepted and a verification code was sent to it via sms
-        "400":
+        400:
           description: the input phone number is invalid or nonexistent
   /api/v1/auth/verify:
     post:
@@ -75,21 +113,21 @@ paths:
                 - phone
                 - code
       responses:
-        "200":
+        200:
           description: the phone number and the code was accepted
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        "400":
+        400:
           description: the input phone number is invalid or nonexistent
-        "401":
+        401:
           description: the code is wrong
   /api/v1/slides:
     get:
       description: Get a list of all available Slides
       responses:
-        "200":
+        200:
           description: list of all slides
           content:
             application/json:
@@ -97,3 +135,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Slide"
+  /api/v1/categories:
+    get:
+      description: list of all available categories
+      responses:
+        200:
+          description: list of all categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+  /api/v1/categories/{id}/products:
+    get:
+      description: list of all available products for a category
+      responses:
+        200:
+          description: list of all available products for a category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
