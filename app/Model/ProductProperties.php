@@ -15,7 +15,7 @@ class ProductProperties extends Collection
         if ($this->has($key)) {
             return $this->get($key);
         }
-        throw new \RunntimeException("invalid property $key");
+        throw new \RuntimeException("invalid property $key");
     }
 
     public function __set($key, $value)

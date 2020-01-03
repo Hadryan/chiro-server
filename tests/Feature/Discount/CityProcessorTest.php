@@ -15,7 +15,7 @@ class CityProcessorTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = $this->createSampleUser();
+        $this->user = $this->createSampleCustomer();
         $this->city = $this->createSampleCity();
         $this->address = $this->createSampleShippingAddress($this->user->id, $this->city->id);
 
@@ -30,6 +30,5 @@ class CityProcessorTest extends TestCase
 
     public function test_city_processor()
     {
-        
     }
 }

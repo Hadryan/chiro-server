@@ -18,7 +18,7 @@ class ShippingAddressController extends Controller
     public function index()
     {
         return $this->respond(ShippingAddress::where([
-            'user_id' => auth('api')->id()
+            'customer_id' => auth('api')->id()
         ])->get());
     }
 

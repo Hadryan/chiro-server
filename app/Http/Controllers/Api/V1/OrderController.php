@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Order;
+use App\Model\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Controller;
 

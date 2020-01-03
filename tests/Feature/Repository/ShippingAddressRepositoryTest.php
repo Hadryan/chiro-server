@@ -23,7 +23,7 @@ class ShippingAddressRepositoryTest extends TestCase
     {
 
         $c = $this->createSampleCity();
-        $u = $this->createSampleUser();
+        $u = $this->createSampleCustomer();
 
 
         app('shippingAddresses')->insert([
@@ -41,7 +41,7 @@ class ShippingAddressRepositoryTest extends TestCase
     {
 
         $c = $this->createSampleCity();
-        $u = $this->createSampleUser();
+        $u = $this->createSampleCustomer();
 
 
         $shippingAddress = app('shippingAddresses')->insert([
@@ -66,7 +66,7 @@ class ShippingAddressRepositoryTest extends TestCase
     public function testGetAddressesForUser()
     {
 
-        $adrss = ShippingAddress::where('user_id', 1)->get();
+        $adrss = ShippingAddress::where('customer_id', 1)->get();
 
         $adrs2 = app('shippingAddresses')->getAddressesForUser(1);
 

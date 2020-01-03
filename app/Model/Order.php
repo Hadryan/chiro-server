@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  */
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'address_id'];
+    protected $fillable = ['customer_id', 'address_id'];
 
     /**
      * @return HasManyThrough

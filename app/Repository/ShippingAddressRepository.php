@@ -41,7 +41,7 @@ class ShippingAddressRepository implements ShippingAddressRepositoryInterface
                 throw new ValidationException($validator);
             }
 
-            $data['user_id'] = $userId;
+            $data['customer_id'] = $userId;
 
             return ShippingAddress::create($data);
         }
@@ -67,6 +67,6 @@ class ShippingAddressRepository implements ShippingAddressRepositoryInterface
      */
     public function getAddressesForUser(int $userId): Collection
     {
-        return ShippingAddress::where('user_id', $userId)->get();
+        return ShippingAddress::where('customer_id', $userId)->get();
     }
 }

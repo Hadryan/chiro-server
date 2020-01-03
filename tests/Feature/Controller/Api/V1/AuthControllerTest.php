@@ -93,7 +93,7 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'user' => [
+            'customer' => [
                 'phone' => '09123456789'
             ]
         ]);

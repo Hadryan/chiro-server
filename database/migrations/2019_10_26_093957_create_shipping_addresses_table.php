@@ -15,7 +15,7 @@ class CreateShippingAddressesTable extends Migration
     {
         Schema::create('shipping_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('customer_id');
             $table->string('name');
             $table->integer('city_id');
             $table->string('address');
@@ -23,7 +23,7 @@ class CreateShippingAddressesTable extends Migration
             $table->float('lng', 8, 10)->nullable();
 
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

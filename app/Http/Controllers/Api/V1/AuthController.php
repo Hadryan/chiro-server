@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Api\Controller;
+use \App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Services\SMS\SmsInterface;
 use Illuminate\Support\Facades\Redis;
+use App\Http\Controllers\Api\Controller;
 use Illuminate\Support\Facades\Validator;
-use \App\Model\User;
 use \App\Services\JWT\JWTServiceInterface;
 
 class AuthController extends Controller
@@ -61,21 +61,21 @@ class AuthController extends Controller
             return $this->fail(__('auth.incorrect_code'), 401);
         }
 
-        $user = User::where('phone', $phone)->first();
+        $customer = Customer::where('phone', $phone)->first();
 
-        if ($user === null) {
-            $user = User::create([
+        if ($customer === null) {
+            $customer = Customer::create([
                 'phone' => $phone,
                 'name' => '',
             ]);
         }
 
         $token = $jwtService->generateJwtToken([
-            'uid' => $user->id,
+            'uid' => $customer->id,
         ]);
 
         return $this->respond([
-            'user' => $user->toArray(),
+            'customer' => $customer->toArray(),
             'token' => $token
         ]);
     }

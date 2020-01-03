@@ -3,8 +3,8 @@
 namespace Tests;
 
 use App\Model\City;
-use App\Model\User;
 use App\Model\Category;
+use App\Model\Customer;
 use App\Model\ShippingAddress;
 use Illuminate\Support\Facades\Hash;
 use App\Services\JWT\JWTServiceInterface;
@@ -14,9 +14,9 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    protected function createSampleUser(): User
+    protected function createSampleCustomer(): Customer
     {
-        return User::create([
+        return Customer::create([
             'phone' => '09123456789',
             'name' => 'Hamed Momeni',
             'email' => 'hamed.ma7@gmail.com',
@@ -24,11 +24,11 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    protected function createSampleShippingAddress(int $userId, int $cityid): ShippingAddress
+    protected function createSampleShippingAddress(int $customerId, int $cityid): ShippingAddress
     {
         return ShippingAddress::create([
             'name' => 'Home',
-            'user_id' => $userId,
+            'customer_id' => $customerId,
             'city_id' => $cityid,
             'lat' => 0,
             'lng' => 0,
@@ -54,11 +54,11 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    protected function getJwt($user = null)
+    protected function getJwt($customer = null)
     {
-        $user = $user ?? $this->createSampleUser();
+        $customer = $customer ?? $this->createSampleCustomer();
         return app(JWTServiceInterface::class)->generateJwtToken([
-            'uid' => $user->id
+            'uid' => $customer->id
         ]);
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Model\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Auth\AuthenticationException;
 use App\Services\JWT\JWTServiceInterface;
-use App\Model\User;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthenticateJWT
 {
@@ -23,7 +23,7 @@ class AuthenticateJWT
         }
 
         $uid = $jwtService->getClaims($token)['uid'];
-        auth('api')->setUser(User::find($uid));
+        auth('api')->setUser(Customer::find($uid));
 
         return $next($request);
     }

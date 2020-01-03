@@ -15,7 +15,7 @@ class ShippingAddressControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = $this->createSampleUser();
+        $this->user = $this->createSampleCustomer();
         $this->jwt = $this->getJwt($this->user);
     }
 
@@ -42,7 +42,7 @@ class ShippingAddressControllerTest extends TestCase
         ]);
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            ['name', 'user_id', 'city_id', 'lat', 'lng', 'address']
+            ['name', 'customer_id', 'city_id', 'lat', 'lng', 'address']
         ]);
     }
 
@@ -92,7 +92,7 @@ class ShippingAddressControllerTest extends TestCase
 
         $response->assertStatus(201);
 
-        $response->assertJsonStructure(['name', 'user_id', 'city_id', 'lat', 'lng', 'address']);
+        $response->assertJsonStructure(['name', 'customer_id', 'city_id', 'lat', 'lng', 'address']);
 
         $address = ShippingAddress::find($response->original->id);
 

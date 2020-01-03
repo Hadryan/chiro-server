@@ -3,15 +3,15 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model\City;
-use App\Model\User;
+use App\Model\Customer;
 use Faker\Generator as Faker;
 use App\Model\ShippingAddress;
 
 $factory->define(ShippingAddress::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'user_id' => function () {
-            return User::all()->random(1)[0]->id;
+        'customer_id' => function () {
+            return Customer::all()->random(1)[0]->id;
         },
         'city_id' => function () {
             return City::all()->random(1)[0]->id;
