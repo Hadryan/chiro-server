@@ -4,8 +4,10 @@ namespace Tests;
 
 use App\Model\City;
 use App\Model\User;
+use App\Model\Category;
 use App\Model\ShippingAddress;
 use Illuminate\Support\Facades\Hash;
+use App\Services\JWT\JWTServiceInterface;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -38,6 +40,25 @@ abstract class TestCase extends BaseTestCase
     {
         return City::create([
             'name' => 'San Francisco',
+        ]);
+    }
+
+    protected function createSampleCategory()
+    {
+        return Category::create([
+            'name' => 'Category',
+            'parent_id' => null,
+            'description' => 'Category description',
+            'image_path' => random_mock_image(),
+            'type' => 'category',
+        ]);
+    }
+
+    protected function getJwt($user = null)
+    {
+        $user = $user ?? $this->createSampleUser();
+        return app(JWTServiceInterface::class)->generateJwtToken([
+            'uid' => $user->id
         ]);
     }
 }

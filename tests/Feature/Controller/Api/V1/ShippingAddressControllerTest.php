@@ -2,15 +2,23 @@
 
 namespace Tests\Feature;
 
-use App\Model\City;
 use App\Model\ShippingAddress;
 use Tests\TestCase;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ShippingAddressControllerTest extends TestCase
 {
     use DatabaseTransactions;
+
+    private $user, $jwt;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = $this->createSampleUser();
+        $this->jwt = $this->getJwt($this->user);
+    }
+
     /**
      * @Test
      */
@@ -26,10 +34,11 @@ class ShippingAddressControllerTest extends TestCase
      */
     public function testIndex()
     {
+        $this->createSampleShippingAddress($this->user->id, $this->createSampleCity()->id);
 
         $response = $this->get('api/v1/addresses', [
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1Nzc5ODYxNTUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdCIsInVpZCI6MTAxfQ.JVseveeQpTyoMTjEM4_Nle8XcRsqg-lNZ4RueOMPmNRy-_vuPWT3isgp3slQHgnv51UlPfqZDkjwmzWzGG3hkg'
+            'Authorization' => 'Bearer ' . $this->jwt
         ]);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -47,13 +56,13 @@ class ShippingAddressControllerTest extends TestCase
             [
                 'name' => 'Home',
                 'address' => 'Ever green terece',
-                // 'city_id' => 1,
+                // 'city_id' => 1, // intentionally omitted
                 'lat' => '55.123456',
                 'lng' => '33.3243567'
             ],
             [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1Nzc5ODYxNTUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdCIsInVpZCI6MTAxfQ.JVseveeQpTyoMTjEM4_Nle8XcRsqg-lNZ4RueOMPmNRy-_vuPWT3isgp3slQHgnv51UlPfqZDkjwmzWzGG3hkg'
+                'Authorization' => 'Bearer ' . $this->jwt
             ]
         );
 
@@ -65,18 +74,19 @@ class ShippingAddressControllerTest extends TestCase
      */
     public function testInsertAddress()
     {
+        $city = $this->createSampleCity();
         $response = $this->post(
             'api/v1/addresses',
             [
                 'name' => 'Home',
                 'address' => 'Ever green terece',
-                'city_id' => 1,
+                'city_id' => $city->id,
                 'lat' => '55.123456',
                 'lng' => '33.3243567'
             ],
             [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1Nzc5ODYxNTUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdCIsInVpZCI6MTAxfQ.JVseveeQpTyoMTjEM4_Nle8XcRsqg-lNZ4RueOMPmNRy-_vuPWT3isgp3slQHgnv51UlPfqZDkjwmzWzGG3hkg'
+                'Authorization' => 'Bearer ' . $this->jwt
             ]
         );
 

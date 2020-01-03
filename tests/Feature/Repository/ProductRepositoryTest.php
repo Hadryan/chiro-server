@@ -3,9 +3,11 @@
 use App\Model\Order;
 use App\Model\ProductProperties;
 use App\Repository\ProductRepository;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProductRepositoryTest extends \Tests\TestCase
 {
+    use DatabaseTransactions;
 
     /** @var ProductRepository */
     private $repository;

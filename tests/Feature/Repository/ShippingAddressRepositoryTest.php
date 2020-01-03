@@ -6,10 +6,12 @@ use Tests\TestCase;
 use App\Model\ShippingAddress;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ShippingAddressRepositoryTest extends TestCase
 {
+    use DatabaseTransactions;
 
     public function testInsertException()
     {
@@ -20,8 +22,8 @@ class ShippingAddressRepositoryTest extends TestCase
     public function testInsert()
     {
 
-        $c = City::first();
-        $u = User::first();
+        $c = $this->createSampleCity();
+        $u = $this->createSampleUser();
 
 
         app('shippingAddresses')->insert([
@@ -38,8 +40,8 @@ class ShippingAddressRepositoryTest extends TestCase
     public function testGet()
     {
 
-        $c = City::first();
-        $u = User::first();
+        $c = $this->createSampleCity();
+        $u = $this->createSampleUser();
 
 
         $shippingAddress = app('shippingAddresses')->insert([

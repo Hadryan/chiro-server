@@ -4,16 +4,22 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Model\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use \Illuminate\Http\UploadedFile;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProductControllerTest extends TestCase
 {
+    use DatabaseTransactions;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
 
     public function testListProducts()
     {
-        $this->seed();
 
         $response = $this->get('/api/v1/products');
 
@@ -33,7 +39,9 @@ class ProductControllerTest extends TestCase
     public function testSingleProduct()
     {
 
-        $response = $this->get('/api/v1/products/20');
+        $products = Product::limit(1)->get();
+
+        $response = $this->get('/api/v1/products/' . $products[0]->id);
 
         $response->assertOk();
         $response->assertJsonStructure([
@@ -109,7 +117,7 @@ class ProductControllerTest extends TestCase
 
         $response->assertOk();
 
-        $items = $response->getContent();
+        // $items = $response->getContent();
 
         $response->assertJsonStructure([[
             'name',

@@ -3,14 +3,17 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SlideControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * @Test
      */
     public function testIndex()
     {
+        $this->seed('SlideTableSeeder');
 
         $response = $this->get('api/v1/slides');
 
