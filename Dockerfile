@@ -1,4 +1,4 @@
-FROM code.putech.ir:5000/chiro-base-api
+FROM 2hamed/chiro-base
 
 COPY . /app
 

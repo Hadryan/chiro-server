@@ -1,7 +1,8 @@
 version: "3"
 services:
   api:
-    image: code.putech.ir:5000/chiro-server:latest
+    image: 2hamed/chiro-api
+    
     command: ["sh", "/app/startup.sh"]
     environment:
       - DB_CONNECTION=pgsql
@@ -13,7 +14,7 @@ services:
       - REDIS_HOST=redis
 
   nginx:
-    image: code.putech.ir:5000/chiro-nginx:latest
+    image: 2hamed/chiro-nginx:latest
     ports:
       - 8080:80
 
