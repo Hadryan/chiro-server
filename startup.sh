@@ -9,6 +9,10 @@ done
 
 sleep 3
 
+cp /app/storage/app/* /app/public/storage/ -rf
+
+chown www-data. /app/public/storage -R
+
 php artisan migrate
 
 php-fpm

@@ -2,8 +2,9 @@ version: "3"
 services:
   api:
     image: 2hamed/chiro-api
-    
     command: ["sh", "/app/startup.sh"]
+    volumes:
+      - storage:/app/public/storage
     environment:
       - DB_CONNECTION=pgsql
       - DB_HOST=db
@@ -15,18 +16,16 @@ services:
 
   nginx:
     image: 2hamed/chiro-nginx:latest
+    volumes:
+      - storage:/app/public/storage
     ports:
       - 8080:80
 
   redis:
     image: redis
-    ports:
-      - 6379:6379
 
   db:
     image: postgres
-    ports:
-      - 5432:5432
     environment:
       - POSTGRES_USER=default
       - POSTGRES_PASSWORD=123456
@@ -37,3 +36,4 @@ services:
 
 volumes:
   dbdata:
+  storage:
