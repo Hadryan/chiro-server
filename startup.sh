@@ -15,4 +15,4 @@ chown www-data. /app/public/storage -R
 
 php artisan migrate
 
-php-fpm
+php-fpm7.2 -F

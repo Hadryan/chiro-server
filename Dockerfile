@@ -1,9 +1,12 @@
-FROM 2hamed/chiro-base
+FROM 2hamed/php-base
+
+RUN apt install -y netcat
 
 COPY ./vendor /app/vendor
 COPY ./storage /app/storage
 COPY ./bootstrap /app/bootstrap
 COPY ./app /app/app
+COPY ./resources /app/resources
 COPY ./public /app/public
 COPY ./routes /app/routes
 COPY ./config /app/config

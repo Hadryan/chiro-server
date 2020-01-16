@@ -1,38 +1,32 @@
-FROM dockage/php:7-fpm
+FROM ubuntu:18.04
 
-RUN apk --no-cache --update add
-RUN apk add composer
-RUN apk add confd@testing
-RUN apk add file
-RUN apk add git
-RUN apk add mariadb-client 
-RUN apk add openssh-client 
-RUN apk add openssl
-RUN apk add php7-bcmath
-RUN apk add php7-ctype
-RUN apk add php7-curl
-RUN apk add php7-dom
-RUN apk add php7-gd
-RUN apk add php7-gettext
-RUN apk add php7-iconv
-RUN apk add php7-intl
-RUN apk add php7-json
-RUN apk add php7-mbstring
-RUN apk add php7-mcrypt
-RUN apk add php7-phar
-RUN apk add php7-session
-RUN apk add php7-simplexml 
-RUN apk add php7-soap
-RUN apk add php7-tokenizer 
-RUN apk add php7-xml
-RUN apk add php7-xmlreader 
-RUN apk add php7-xmlwriter 
-RUN apk add php7-zip
-RUN apk add php7-zlib
-RUN apk add php7-redis
-RUN apk add php7-xdebug
-RUN apk add php7-pgsql
-RUN apk add php7-pdo_pgsql
-RUN apk add php7-fileinfo
+RUN apt update
+RUN apt install -y php7.2-bcmath
+RUN apt install -y php7.2-ctype
+RUN apt install -y php7.2-curl
+RUN apt install -y php7.2-dom
+RUN apt install -y php7.2-gd
+RUN apt install -y php7.2-gettext
+RUN apt install -y php7.2-iconv
+RUN apt install -y php7.2-intl
+RUN apt install -y php7.2-json
+RUN apt install -y php7.2-mbstring
+RUN apt install -y php7.2-phar
+RUN apt install -y php7.2-simplexml 
+RUN apt install -y php7.2-soap
+RUN apt install -y php7.2-tokenizer 
+RUN apt install -y php7.2-xml
+RUN apt install -y php7.2-xmlreader 
+RUN apt install -y php7.2-xmlwriter 
+RUN apt install -y php7.2-zip
+RUN apt install -y php7.2-redis
+RUN apt install -y php7.2-pgsql
+RUN apt install -y php7.2-fileinfo
+RUN apt install -y php7.2-fpm
+RUN apt install -y php7.2-pdo
 
-COPY ./www.conf /etc/php/7.3/php-fpm.d/
+RUN mkdir -p /run/php
+
+COPY ./www.conf /etc/php/7.2/fpm/pool.d/
+
+CMD ["php-fpm7.2", "-F"]
