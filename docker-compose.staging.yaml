@@ -2,9 +2,8 @@ version: "3"
 services:
   api:
     image: 2hamed/chiro-api
-    command: ["sh", "/app/startup.sh"]
     volumes:
-      - storage:/app/public/storage
+      - storage:/app/public/static
     environment:
       - DB_CONNECTION=pgsql
       - DB_HOST=db
@@ -17,7 +16,7 @@ services:
   nginx:
     image: 2hamed/chiro-nginx:latest
     volumes:
-      - storage:/app/public/storage
+      - storage:/app/public/static
     ports:
       - 8080:80
 

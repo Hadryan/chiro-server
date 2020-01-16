@@ -19,4 +19,6 @@ RUN cp .env.example .env
 
 RUN php artisan key:generate
 
-RUN chown www-data:www-data storage -R
+RUN chown www-data:www-data /app/public -R
+
+CMD ["bash", "/app/startup.sh"]

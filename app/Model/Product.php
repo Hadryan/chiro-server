@@ -29,7 +29,10 @@ class Product extends Model
 
     public function getPropertiesAttribute()
     {
-        $data = json_decode($this->attributes['properties'], true);
+        $data = [];
+        if (isset($this->attributes['properties'])) {
+            $data = json_decode($this->attributes['properties'], true);
+        }
         return new ProductProperties($data);
     }
 
