@@ -3,7 +3,7 @@ name: Laravel
 on: [push]
 
 jobs:
-  laravel-tests:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -29,9 +29,10 @@ jobs:
           CACHE_DRIVER: file
         run: vendor/bin/phpunit
   build:
+    needs: tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1.0
+      - uses: actions/checkout@v2
       - uses: mr-smithers-excellent/docker-build-push@v2
         with:
           image: 2hamed/chiro-api
