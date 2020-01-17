@@ -30,7 +30,6 @@ class ProductControllerTest extends TestCase
                 'name',
                 'price',
                 'discount',
-                'properties',
                 'image_url'
             ]
         ]);
@@ -49,7 +48,6 @@ class ProductControllerTest extends TestCase
             'name',
             'price',
             'discount',
-            'properties',
             'images',
             'categories',
         ]);
