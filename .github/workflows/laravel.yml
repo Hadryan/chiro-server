@@ -37,6 +37,7 @@ jobs:
         with:
           image: 2hamed/chiro-api
           tag: latest
+          registery: docker.io
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
