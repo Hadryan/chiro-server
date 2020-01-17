@@ -15,7 +15,7 @@ class ProductImage extends Model
 
     public function getPathAttribute()
     {
-        return url($this->attributes['path']);
+        return @$this->attributes['path'] ? url('storage/' . $this->attributes['path']) : '';
     }
 
     public function products()

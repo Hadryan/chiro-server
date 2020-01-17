@@ -4,8 +4,7 @@ services:
     image: 2hamed/chiro-api
     command: ["sh", "/app/startup.sh"]
     volumes:
-      - ./:/app
-      - storage:/app/public/storage
+      - storage:/app/storage/app/public
     environment:
       - DB_CONNECTION=pgsql
       - DB_HOST=db

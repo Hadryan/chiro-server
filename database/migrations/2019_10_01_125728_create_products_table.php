@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->default('');
-            $table->jsonb('properties')->nullable();
             $table->integer('price')->default(0);
             $table->integer('discount')->nullable();
             $table->timestamps();

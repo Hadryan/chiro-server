@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    protected $fillable = ['name', 'description', 'properties', 'price', 'discount', 'parent_id'];
+    protected $fillable = ['name', 'description', 'price', 'discount', 'parent_id'];
 
     protected $appends = ['image_url'];
 
@@ -27,19 +27,11 @@ class Product extends Model
         return $image[0]->path;
     }
 
-    public function getPropertiesAttribute()
+    public function properties()
     {
-        $data = [];
-        if (isset($this->attributes['properties'])) {
-            $data = json_decode($this->attributes['properties'], true);
-        }
-        return new ProductProperties($data);
+        return $this->hasMany('App\Model\ProductProperties');
     }
 
-    public function setPropertiesAttribute($properties)
-    {
-        $this->attributes['properties'] = $properties->toJson();
-    }
     public function image()
     {
         return $this->hasOne('App\Model\ProductImage')->select(['product_id', 'path']);

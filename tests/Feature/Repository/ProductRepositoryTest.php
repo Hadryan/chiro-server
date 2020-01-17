@@ -22,10 +22,6 @@ class ProductRepositoryTest extends \Tests\TestCase
         $product = $this->repository->insert([
             'name' => 'My Product',
             'description' => 'this is my product',
-            'properties' => new ProductProperties([
-                'size' => 'xxl',
-                'type' => 'sports'
-            ]),
             'price' => 10000,
             'discount' => 10
         ], 'fake/image/path.png');

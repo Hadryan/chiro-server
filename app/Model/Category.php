@@ -10,7 +10,7 @@ class Category extends Model
 
     public function getImagePathAttribute()
     {
-        return url($this->attributes['image_path']);
+        return @$this->attributes['image_path'] ? url('storage' . $this->attributes['image_path']) : '';
     }
 
     public function products()
