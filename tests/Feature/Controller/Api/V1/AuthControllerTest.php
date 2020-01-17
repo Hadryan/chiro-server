@@ -86,6 +86,13 @@ class AuthControllerTest extends TestCase
      */
     public function testVerifySuccssful()
     {
+
+        $this->mock(\App\Services\SMS\SmsInterface::class, function ($mock) {
+            $mock->shouldReceive('sendOtp')->andReturn('12345');
+        });
+
+        $this->post('api/v1/auth/request', ['phone' => '09123456789']);
+
         $response = $this->post('api/v1/auth/verify', [
             'phone' => '09123456789',
             'code' => '12345'

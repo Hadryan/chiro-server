@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use \App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Services\SMS\SmsInterface;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Api\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -36,8 +37,7 @@ class AuthController extends Controller
             $response['code'] = $code;
         }
 
-        Redis::set(self::OTP_PHONE_PREFIX . $phone, $code);
-        Redis::expire(self::OTP_PHONE_PREFIX . $phone, 120);
+        Cache::put(self::OTP_PHONE_PREFIX . $phone, $code, 1);
 
         return $this->respond($response, 200, __("auth.otp_code_sent"));
     }
@@ -55,7 +55,7 @@ class AuthController extends Controller
         $phone = $request->input('phone');
         $code = $request->input('code');
 
-        $correctCode = Redis::get(self::OTP_PHONE_PREFIX . $phone);
+        $correctCode = Cache::get(self::OTP_PHONE_PREFIX . $phone);
 
         if ($code !== $correctCode) {
             return $this->fail(__('auth.incorrect_code'), 401);
