@@ -10,12 +10,12 @@ jobs:
       - name: Cache vendor dir
         uses: actions/cache@v1
         with:
-          path: vendor # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-laravel-${{ hashFiles('**/composer.lock') }}
+          path: ./vendor
+          key: laravel-vendor-${{ hashFiles('**/composer.lock') }}
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
-        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - name: Generate key
         run: php artisan key:generate
       - name: Create Database
@@ -41,8 +41,8 @@ jobs:
       - name: Cache vendor dir
         uses: actions/cache@v1
         with:
-          path: vendor # npm cache files are stored in `~/.npm` on Linux/macOS
-          key: ${{ runner.os }}-laravel-${{ hashFiles('**/composer.lock') }}
+          path: ./vendor
+          key: laravel-vendor-${{ hashFiles('**/composer.lock') }}
       - uses: mr-smithers-excellent/docker-build-push@v2
         with:
           image: 2hamed/chiro-api
