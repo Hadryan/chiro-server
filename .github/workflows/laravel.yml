@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache node modules
+      - name: Cache vendor dir
         uses: actions/cache@v1
         with:
-          path: ~/vendor # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: vendor # npm cache files are stored in `~/.npm` on Linux/macOS
           key: ${{ runner.os }}-laravel-${{ hashFiles('**/composer.lock') }}
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -38,10 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache node modules
+      - name: Cache vendor dir
         uses: actions/cache@v1
         with:
-          path: ~/vendor # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: vendor # npm cache files are stored in `~/.npm` on Linux/macOS
           key: ${{ runner.os }}-laravel-${{ hashFiles('**/composer.lock') }}
       - uses: mr-smithers-excellent/docker-build-push@v2
         with:
