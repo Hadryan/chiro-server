@@ -74,6 +74,23 @@ components:
           type: integer
         discount:
           type: integer
+    Address:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        customer_id:
+          type: integer
+        city_id:
+          type: integer
+        lat:
+          type: number
+        lng:
+          type: number
+        address:
+          type: string
 
 paths:
   /api/v1/auth/request:
@@ -150,6 +167,13 @@ paths:
   /api/v1/categories/{id}/products:
     get:
       description: list of all available products for a category
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The category to retreive products for
       responses:
         200:
           description: list of all available products for a category
@@ -159,3 +183,90 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Product"
+  /api/v1/products:
+    get:
+      description: list of all available products
+      responses:
+        200:
+          description: list of all available products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/v1/products/{id}:
+    get:
+      description: details of a single product
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to get
+      responses:
+        200:
+          description: details of a single product
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        404:
+          description: Product not found
+  /api/v1/products/search:
+    get:
+      description: search among all products
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          required: true
+          description: The string to search for in product title and description
+      responses:
+        200:
+          description: result of the search query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /api/v1/addresses:
+    post:
+      description: Inserts a new address for the current user, Requires JWT token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                lat:
+                  type: number
+                lng:
+                  type: number
+                address:
+                  type: string
+              required:
+                - name
+                - city_id
+                - address
+                - lat
+                - lng
+      responses:
+        201:
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+        422:
+          description: Invalid parameters supplied
