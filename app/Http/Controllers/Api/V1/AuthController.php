@@ -37,7 +37,7 @@ class AuthController extends Controller
             $response['code'] = $code;
         }
 
-        Cache::put(self::OTP_PHONE_PREFIX . $phone, $code, 1);
+        Cache::put(self::OTP_PHONE_PREFIX . $phone, $code, 120);
 
         return $this->respond($response, 200, __("auth.otp_code_sent"));
     }
@@ -56,6 +56,8 @@ class AuthController extends Controller
         $code = $request->input('code');
 
         $correctCode = Cache::get(self::OTP_PHONE_PREFIX . $phone);
+
+        Cache::delete(self::OTP_PHONE_PREFIX . $phone);
 
         if ($code !== $correctCode) {
             return $this->fail(__('auth.incorrect_code'), 401);

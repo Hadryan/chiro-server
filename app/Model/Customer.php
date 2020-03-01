@@ -24,7 +24,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password', 'deleted_at'
     ];
 
     /**
