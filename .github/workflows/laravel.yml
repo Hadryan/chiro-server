@@ -51,3 +51,14 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling update docker image and updating service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIV_KEY }}
+          script: docker image pull 2hamed/chiro-api && docker service update --image 2hamed/chiro-api chiro_api
