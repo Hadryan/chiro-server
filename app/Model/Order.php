@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Discount;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
@@ -14,7 +15,11 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  */
 class Order extends Model
 {
+
+    use SoftDeletes;
+
     protected $fillable = ['customer_id', 'address_id'];
+    protected $dates = ['deleted_at'];
 
     /**
      * @return HasManyThrough
@@ -30,5 +35,6 @@ class Order extends Model
     }
 
     public function addDiscount(Discount $discount)
-    { }
+    {
+    }
 }
