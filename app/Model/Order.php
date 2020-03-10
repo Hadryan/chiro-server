@@ -31,7 +31,12 @@ class Order extends Model
 
     public function shippingAddress()
     {
-        return $this->hasOne('App\Model\ShippingAddress');
+        return $this->belongsTo('App\Model\ShippingAddress', 'address_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Model\Customer', 'customer_id');
     }
 
     public function addDiscount(Discount $discount)

@@ -33,9 +33,97 @@
 @stop
 
 @section('content')
+    <div class="page-content read container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-bordered" style="padding-bottom:5px;">
+                    
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">{{__('panel.orders')}}</h3>
+                    </div>
+
+                    <div class="panel-body" style="padding-top:0;">
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            {{ __('panel.product') }}
+                                        </th>
+                                        <th>
+                                            {{ __('panel.quantity') }}
+                                        </th>
+                                        <th>
+                                            {{ __('panel.unit_price') }}
+                                        </th>
+                                        <th>
+                                            {{ __('panel.total_price')}}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            @foreach( $dataTypeContent->products as $product)
+                            <tr>
+                                <td>
+                                    {{$product->name}}
+                                </td>
+                                <td>
+                                    {{$product->pivot->quantity}}
+                                </td>
+                                <td>
+                                    {{$product->price}}
+                                </td>
+                                <td>
+                                    {{$product->price*$product->pivot->quantity}}
+                                </td>
+                            </tr>
+                            @endforeach
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content read container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-bordered" style="padding-bottom:5px;">
+                    
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">{{__('panel.customer_info')}}</h3>
+                    </div>
 @php
-dd($dataType);
+$customer = $dataTypeContent->customer;
+$address = $dataTypeContent->shippingAddress;
 @endphp
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td>{{__('panel.customer_name')}}</td>
+                                <td>{{$customer->name}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{__('panel.customer_cellphone')}}</td>
+                                <td>{{$customer->phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{__('panel.customer_address')}}</td>
+                                <td>
+                                    {{$address->address}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">
