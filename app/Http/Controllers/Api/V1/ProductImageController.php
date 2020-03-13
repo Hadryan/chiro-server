@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\ProductImage;
+use App\Model\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Api\Controller;
 
 class ProductImageController extends Controller
 {
@@ -35,7 +37,18 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $file = $request->file('image');
+        $filePath = Storage::disk('public')->putFile('product/image', $file);
+
+        $pImage = ProductImage::create([
+            'path' => $filePath,
+            'product_id' => $request->input('product_id')
+        ]);
+
+        return $this->respond([
+            'image' => $pImage
+        ]);
     }
 
     /**

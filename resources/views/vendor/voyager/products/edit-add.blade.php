@@ -7,6 +7,19 @@
 
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        #product-images{
+            margin: 25px;
+        }
+
+        .product-image{
+            float: right;
+            margin: 5px;
+        }
+        .product-image img{
+            max-width: 120px;
+        }
+    </style>
 @stop
 
 @section('page_title', __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular'))
@@ -110,6 +123,28 @@
                     </form>
 
                 </div>
+            @if($dataTypeContent->exists)
+                <div class="panel panel-bordered">
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">{{ __('panel.product_images') }}</h3>
+                    </div>
+                    <div class="panel-body" style="padding-top:0;">
+                        <form action="" id="image-upload">
+                            <input type="file" name="image"/>
+                            <input type="hidden" value="{{$dataTypeContent->id}}" />
+                            {{ csrf_field() }}
+                        </form>
+
+                        <div id="product-images">
+                            @foreach($dataTypeContent->images as $image)
+                                <div class="product-image">
+                                    <img src="{{$image->path}}"/>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -136,14 +171,28 @@
         </div>
     </div>
     <!-- End Delete File Modal -->
-
-    <form id="file_upload">
-        <input type="file" name="file"/>
-    </form>
+    
 @stop
 
 @section('javascript')
     <script>
+
+        $('document').ready(function () {
+            $('#image-upload input').on('change',function(){
+                $.ajax({
+                    url: '{{route("product.image")}}', 
+                    type: 'POST',
+                    data: new FormData($('#image-upload')[0]), // The form with the file inputs.
+                    processData: false,
+                    contentType: false                    // Using FormData, no need to process data.
+                }).done(function(){
+                        console.log("Success: Files sent!");
+                }).fail(function(){
+                        console.log("An error occurred, the files couldn't be sent!");
+                });
+            });
+        });
+
         var params = {};
         var $file;
 
