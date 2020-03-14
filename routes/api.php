@@ -37,4 +37,5 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     });
 
     Route::as('product.image')->post('products/image', 'ProductImageController@store');
+    Route::delete('products/image/{id}', 'ProductImageController@destroy');
 });

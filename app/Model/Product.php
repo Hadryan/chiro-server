@@ -38,7 +38,7 @@ class Product extends Model
     }
     public function images()
     {
-        return $this->hasMany('App\Model\ProductImage')->select(['product_id', 'path']);
+        return $this->hasMany('App\Model\ProductImage')->select(['id', 'product_id', 'path']);
     }
 
     public function categories()

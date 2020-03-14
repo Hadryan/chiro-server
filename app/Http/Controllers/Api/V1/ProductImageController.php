@@ -6,6 +6,7 @@ use App\Model\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Api\Controller;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProductImageController extends Controller
 {
@@ -39,16 +40,14 @@ class ProductImageController extends Controller
     {
 
         $file = $request->file('image');
-        $filePath = Storage::disk('public')->putFile('product/image', $file);
+        $filePath = Storage::disk('public')->putFile('product/images', $file);
 
         $pImage = ProductImage::create([
             'path' => $filePath,
             'product_id' => $request->input('product_id')
         ]);
 
-        return $this->respond([
-            'image' => $pImage
-        ]);
+        return $this->respond($pImage);
     }
 
     /**
@@ -91,8 +90,14 @@ class ProductImageController extends Controller
      * @param  \App\ProductImage  $productImage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductImage $productImage)
+    public function destroy($id)
     {
-        //
+        $productImage = ProductImage::findOrFail($id);
+
+        if (!Storage::disk('public')->delete($productImage->getOriginal('path'))) {
+            throw new HttpException(500);
+        }
+
+        return $this->respond($productImage->delete());
     }
 }

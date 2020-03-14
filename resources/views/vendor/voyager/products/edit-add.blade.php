@@ -18,6 +18,31 @@
         }
         .product-image img{
             max-width: 120px;
+            float: left;
+        }
+        .product-image .remove{
+            display: block;
+            font-size: x-large;
+            position: absolute;
+            cursor: pointer;
+            color:white;
+            text-shadow: 0 1px 2px black;
+        }
+        .clr{
+            clear:both;
+        }
+        #image-upload{
+            float:right;
+        }
+
+        .loading-box {
+            display: none;
+            float: right;
+            padding: 10px;
+            border-radius: 5px;
+            background: #faffd9;
+            border: 1px solid #eee;
+            margin: 10px;
         }
     </style>
 @stop
@@ -129,16 +154,23 @@
                         <h3 class="panel-title">{{ __('panel.product_images') }}</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        <form action="" id="image-upload">
-                            <input type="file" name="image"/>
-                            <input type="hidden" value="{{$dataTypeContent->id}}" />
-                            {{ csrf_field() }}
-                        </form>
+                        <div class="form-wrapper">
+                            <form action="" id="image-upload">
+                                <input type="file" name="image"/>
+                                <input type="hidden" name="product_id" value="{{$dataTypeContent->id}}" />
+                                {{ csrf_field() }}
+                            </form>
+                            <div class="loading-box">
+                                {{__('panel.please_wait')}}
+                            </div>
+                        </div>
+                        <div class="clr"></div>
 
                         <div id="product-images">
                             @foreach($dataTypeContent->images as $image)
-                                <div class="product-image">
+                                <div class="product-image" id="product-image-{{ $image->id }}">
                                     <img src="{{$image->path}}"/>
+                                    <span data-id="{{$image->id}}" class="icon voyager-x remove"></span>
                                 </div>
                             @endforeach
                         </div>
@@ -178,19 +210,53 @@
     <script>
 
         $('document').ready(function () {
+
+            newImageTemplate = $('<div class="product-image"><img src=""/><span class="icon voyager-x remove"></span></div>')
             $('#image-upload input').on('change',function(){
+                $('.loading-box').show();
                 $.ajax({
                     url: '{{route("product.image")}}', 
                     type: 'POST',
                     data: new FormData($('#image-upload')[0]), // The form with the file inputs.
                     processData: false,
                     contentType: false                    // Using FormData, no need to process data.
-                }).done(function(){
-                        console.log("Success: Files sent!");
+                }).done(function(resp){
+                    let newImage = newImageTemplate.clone();
+                    $('img', newImage).attr("src", resp.path);
+                    $('.remove', newImage).attr("data-id", resp.id);
+                    $('.remove', newImage).click(function() {
+                        handleRemove($(this).attr('data-id'));
+                    });
+                    $('#product-images').append(newImage);
+                    $('.loading-box').hide();
                 }).fail(function(){
-                        console.log("An error occurred, the files couldn't be sent!");
+                    alert({{__('panel.product_image_upload_error')}})
+                    $('.loading-box').hide();
                 });
             });
+
+            $('.product-image .remove').click(function(){
+                handleRemove($(this).attr('data-id'));
+            });
+
+            function handleRemove(imageId){
+                var confirmed = confirm('{{__('panel.delete_prompt')}}');
+                if (confirmed){
+                    $('.loading-box').show();
+                    $.ajax({
+                        url: '{{route("product.image")}}/'+imageId, 
+                        type: 'DELETE',
+                    })
+                    .done(function(){
+                        $('#product-image-'+imageId).remove();
+                        $('.loading-box').hide();
+                    })
+                    .fail(function(){
+                        alert('delete failed');
+                        $('.loading-box').hide();
+                    });
+                }
+            }
         });
 
         var params = {};
