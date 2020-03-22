@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::as('login')->get('/', function () {
     return view('welcome');
 });
 

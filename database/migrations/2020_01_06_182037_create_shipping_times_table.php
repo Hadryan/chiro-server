@@ -15,7 +15,8 @@ class CreateShippingTimesTable extends Migration
     {
         Schema::create('shipping_times', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->tinyInteger('starting_hour');
+            $table->tinyInteger('ending_hour');
         });
     }
 

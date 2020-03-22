@@ -18,7 +18,7 @@ class Order extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['customer_id', 'address_id'];
+    protected $fillable = ['customer_id', 'address_id', 'status'];
     protected $dates = ['deleted_at'];
 
     /**
