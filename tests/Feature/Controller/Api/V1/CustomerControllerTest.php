@@ -20,8 +20,7 @@ class CustomerControllerTest extends TestCase
     {
         parent::setUp();
 
-        factory(Customer::class, 5)->create();
-        $this->currentCustomer = Customer::limit(1)->get()->first();
+        list($this->currentCustomer) = factory(Customer::class, 1)->create();
         $this->jwt = app(JWTServiceInterface::class)->generateJwtToken([
             'uid' => $this->currentCustomer->id,
         ]);

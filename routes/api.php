@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function () {
+
+    Route::get('index', 'IndexController@index');
+
     Route::post('auth/request', 'AuthController@request');
     Route::post('auth/verify', 'AuthController@verify');
 
@@ -34,12 +37,16 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::middleware(['auth.jwt'])->group(function () {
         Route::get('addresses', 'ShippingAddressController@index');
         Route::post('addresses', 'ShippingAddressController@store');
-        Route::delete('addresses/{id}', 'ShippingAddressController@destroy');
+        Route::delete('addresses/{id}', 'ShippingAddressController@destroy')->where(['productId' => '[0-9]+']);
 
         Route::get('customers', 'CustomerController@index');
         Route::patch('customers', 'CustomerController@update');
+
+        Route::get('favorites', 'FavoritesController@index');
+        Route::post('favorites', 'FavoritesController@add');
+        Route::delete('favorites/{productId}', 'FavoritesController@remove')->where(['productId' => '[0-9]+']);
     });
 
     Route::as('product.image')->post('products/image', 'ProductImageController@store');
-    Route::delete('products/image/{id}', 'ProductImageController@destroy');
+    Route::delete('products/image/{id}', 'ProductImageController@destroy')->where(['productId' => '[0-9]+']);
 });

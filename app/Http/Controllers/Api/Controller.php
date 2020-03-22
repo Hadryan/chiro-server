@@ -11,8 +11,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function respond($data, $code = 200, $message = null)
+    public function respond($data = null, $code = 200, $message = null)
     {
+        $data = $data ?? [
+            'status' => 'success'
+        ];
         return response()->json($data, $code, ['X-Message' => $message]);
     }
 

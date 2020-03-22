@@ -16,7 +16,7 @@ class AddStatusToOrders extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->tinyInteger('status')->default(OrderStatus::Pending);
-            $table->tinyInteger('shipping_time_id');
+            $table->tinyInteger('shipping_time_id')->nullable();
 
             $table->foreign('shipping_time_id')->references('id')->on('shipping_times');
         });
