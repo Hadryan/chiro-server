@@ -82,11 +82,12 @@ class ShippingAddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ShippingAddress  $shippingAddress
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ShippingAddress $shippingAddress)
+    public function destroy($id)
     {
-        //
+        $deleted = ShippingAddress::findOrFail($id)->delete();
+        return $this->respond(['deleted' => $deleted]);
     }
 }

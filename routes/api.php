@@ -34,6 +34,10 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::middleware(['auth.jwt'])->group(function () {
         Route::get('addresses', 'ShippingAddressController@index');
         Route::post('addresses', 'ShippingAddressController@store');
+        Route::delete('addresses/{id}', 'ShippingAddressController@destroy');
+
+        Route::get('customers', 'CustomerController@index');
+        Route::patch('customers', 'CustomerController@update');
     });
 
     Route::as('product.image')->post('products/image', 'ProductImageController@store');
