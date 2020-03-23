@@ -38,7 +38,7 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::delete($id);
     }
 
-    public function search(array $keywords, $or = true): Collection
+    public function search(array $keywords, $or = true)
     {
 
         $operator = $or ? 'orWhere' : 'where';
@@ -50,6 +50,6 @@ class ProductRepository implements ProductRepositoryInterface
             $query = $query->$operator('description', 'like', sprintf('%%%s%%', $k));
         }
 
-        return $query->get();
+        return $query->paginate();
     }
 }

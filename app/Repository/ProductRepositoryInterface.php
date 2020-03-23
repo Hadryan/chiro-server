@@ -43,5 +43,5 @@ interface ProductRepositoryInterface
      * @param bool $or whether to OR keywords or AND them
      * @return array
      */
-    public function search(array $keywords, $or = true): \Illuminate\Support\Collection;
+    public function search(array $keywords, $or = true);
 }
