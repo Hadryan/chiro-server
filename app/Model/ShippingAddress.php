@@ -10,6 +10,11 @@ class ShippingAddress extends Model
 
     public $timestamps =  false;
 
+    protected $casts = [
+        'lat' => 'float',
+        'lng' => 'float',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Model\Customer');
