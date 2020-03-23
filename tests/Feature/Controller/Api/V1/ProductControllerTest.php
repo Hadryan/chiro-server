@@ -114,15 +114,12 @@ class ProductControllerTest extends TestCase
         $response = $this->get('/api/v1/products/search?query=' . $query, ['Accept' => 'application/json']);
 
         $response->assertOk();
-
-        // $items = $response->getContent();
-
-        $response->assertJsonStructure([[
-            'name',
-            'description',
-            'price',
-            'image_url'
-        ]]);
+        $response->assertJsonStructure([
+            'data' => [array_diff(array_keys($products[0]->toArray()), ['categories'])],
+            'total',
+            'from',
+            'to'
+        ]);
     }
 
     public function test_products_by_category()
