@@ -45,6 +45,14 @@ class FavoritesControllerTest extends TestCase
             'product_id' => $this->product->id,
             'customer_id' => $this->currentCustomer->id,
         ]);
+
+        $response = $this->post('api/v1/favorites', [
+            'product_id' => $this->product->id,
+        ], [
+            'Authorization' => 'Bearer ' . $this->jwt
+        ]);
+
+        $response->assertStatus(409);
     }
 
     public function test_remove_favorite()

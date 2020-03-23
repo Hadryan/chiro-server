@@ -6,6 +6,7 @@ use App\Model\Product;
 use App\Model\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Controller;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class FavoritesController extends Controller
 {
@@ -14,7 +15,7 @@ class FavoritesController extends Controller
         $customerId = auth('api')->id();
 
         $products = \DB::table('products')
-            ->innerJoin('favorites', 'products.id', '=', 'favorites.product_id')
+            ->join('favorites', 'products.id', '=', 'favorites.product_id')
             ->where('favorites.customer_id', $customerId)
             ->get();
         return $this->respond($products);
@@ -27,6 +28,13 @@ class FavoritesController extends Controller
         ]);
 
         $customerId = auth('api')->id();
+
+        if (null != Favorite::where([
+            'product_id' => $data['product_id'],
+            'customer_id' => $customerId,
+        ])->first()) {
+            throw new HttpException(409);
+        }
 
         Product::findOrFail($data['product_id']);
 
