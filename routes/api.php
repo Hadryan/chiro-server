@@ -28,9 +28,9 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
     Route::get('products', 'ProductController@index');
     Route::get('products/{id}', 'ProductController@single')->where('id', '[0-9]+');
     Route::post('products', 'ProductController@store');
+    Route::get('categories/{categoryId}/products', 'ProductController@productsByCategory')->where(['categoryId' => '[0-9]+']);;
 
     Route::get('categories', 'CategoryController@index');
-    Route::get('categories/{id}/products', 'ProductController@productsByCategory');
 
     Route::get('slides', 'SlideController@index');
 

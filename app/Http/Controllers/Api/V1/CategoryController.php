@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Api\Controller;
 use App\Model\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Controller;
 
 class CategoryController extends Controller
 {

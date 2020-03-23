@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Model\Product;
-use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Api\Controller;
@@ -56,9 +55,11 @@ class ProductController extends Controller
         return $this->respond($result);
     }
 
-    public function productsByCategory($id)
+    public function productsByCategory($categoryId)
     {
-        $products = Category::find($id)->products();
+        $products = Product::whereHas('categories', function ($query) use ($categoryId) {
+            $query->where('categories.id', $categoryId);
+        })->paginate();
 
         return $this->respond($products);
     }

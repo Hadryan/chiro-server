@@ -124,4 +124,18 @@ class ProductControllerTest extends TestCase
             'image_url'
         ]]);
     }
+
+    public function test_products_by_category()
+    {
+        $product = Product::all()->first();
+        $response = $this->get('api/v1/categories/' . $product->categories->get(0)->id . '/products');
+
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'data' => [array_diff(array_keys($product->toArray()), ['categories'])],
+            'total',
+            'from',
+            'to'
+        ]);
+    }
 }
