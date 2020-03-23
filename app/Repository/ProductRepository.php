@@ -46,8 +46,8 @@ class ProductRepository implements ProductRepositoryInterface
         $query = (new Product())->newQuery();
 
         foreach ($keywords as $k) {
-            $query = $query->$operator('name', 'like', sprintf('%%%s%%', $k));
-            $query = $query->$operator('description', 'like', sprintf('%%%s%%', $k));
+            $query = $query->$operator('name', 'ilike', sprintf('%%%s%%', $k));
+            $query = $query->$operator('description', 'ilike', sprintf('%%%s%%', $k));
         }
 
         return $query->paginate();
