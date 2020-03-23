@@ -102,7 +102,7 @@ class ProductControllerTest extends TestCase
 
     public function testProductSearch()
     {
-
+        $this->withoutExceptionHandling();
         $products = Product::limit(3)->orderBy('created_at', 'ASC')->get();
 
         $query = '';
