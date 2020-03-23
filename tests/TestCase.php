@@ -14,6 +14,12 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->withoutExceptionHandling();
+    }
+
     protected function createSampleCustomer(): Customer
     {
         return Customer::create([
