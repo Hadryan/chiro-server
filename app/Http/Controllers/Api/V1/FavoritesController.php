@@ -17,7 +17,7 @@ class FavoritesController extends Controller
         $products = \DB::table('products')
             ->join('favorites', 'products.id', '=', 'favorites.product_id')
             ->where('favorites.customer_id', $customerId)
-            ->get();
+            ->paginate();
         return $this->respond($products);
     }
 
@@ -33,7 +33,7 @@ class FavoritesController extends Controller
             'product_id' => $data['product_id'],
             'customer_id' => $customerId,
         ])->first()) {
-            throw new HttpException(409);
+            throw new HttpException(409, __('fav.item_already_exists'));
         }
 
         Product::findOrFail($data['product_id']);
