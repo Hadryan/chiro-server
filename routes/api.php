@@ -26,7 +26,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
 
     Route::get('products/search', 'ProductController@search');
     Route::get('products', 'ProductController@index');
-    Route::get('products/{id}', 'ProductController@single')->where('id', '[0-9]+');
+    Route::middleware(['auth.jwt'])->get('products/{id}', 'ProductController@single')->where('id', '[0-9]+');
     Route::post('products', 'ProductController@store');
     Route::get('categories/{categoryId}/products', 'ProductController@productsByCategory')->where(['categoryId' => '[0-9]+']);;
 
@@ -34,7 +34,7 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
 
     Route::get('slides', 'SlideController@index');
 
-    Route::middleware(['auth.jwt'])->group(function () {
+    Route::middleware(['auth.jwt:force'])->group(function () {
         Route::get('addresses', 'ShippingAddressController@index');
         Route::post('addresses', 'ShippingAddressController@store');
         Route::delete('addresses/{id}', 'ShippingAddressController@destroy')->where(['productId' => '[0-9]+']);

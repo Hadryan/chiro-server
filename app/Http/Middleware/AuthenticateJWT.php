@@ -10,7 +10,7 @@ use Illuminate\Auth\AuthenticationException;
 
 class AuthenticateJWT
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $force = null)
     {
         $token = $request->headers->get('Authorization');
         $token = explode(' ', $token);
@@ -19,11 +19,13 @@ class AuthenticateJWT
         $jwtService = app(JWTServiceInterface::class);
 
         if (!$jwtService->validateJwtToken($token)) {
-            throw new AuthenticationException();
+            if ($force) {
+                throw new AuthenticationException();
+            }
+        } else {
+            $uid = $jwtService->getClaims($token)['uid'];
+            auth('api')->setUser(Customer::find($uid));
         }
-
-        $uid = $jwtService->getClaims($token)['uid'];
-        auth('api')->setUser(Customer::find($uid));
 
         return $next($request);
     }
