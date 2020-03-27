@@ -6,7 +6,7 @@ use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Api\Controller;
-
+use App\Model\Favorite;
 
 class ProductController extends Controller
 {
@@ -18,7 +18,15 @@ class ProductController extends Controller
 
     public function single($id)
     {
-        $product = app('products')->get($id);
+        $product = app('products')->get($id)->toArray();
+
+        if (!auth('api')->guest()) {
+            $customerId = auth('api')->id();
+            $product['is_favorite'] = Favorite::where([
+                'product_id' => $product['id'],
+                'customer_id' => $customerId,
+            ])->exists();
+        }
 
         return $this->respond($product);
     }
