@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Model\Order;
+use App\Model\Product;
+use App\Model\OrderProduct;
 use Illuminate\Http\Request;
+use App\Model\ShippingAddress;
 use App\Http\Controllers\Api\Controller;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends Controller
 {
@@ -36,7 +40,51 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'address_id' => 'required|numeric',
+            'time_id' => 'required|numeric',
+            'products' => 'required'
+        ]);
+
+        $customerId = auth('api')->id();
+
+        $shippingAddress = ShippingAddress::findOrFail($data['address_id']);
+
+        if ($shippingAddress->customer_id != $customerId) {
+            throw new HttpException(403, __('order.invalid_address_id'));
+        }
+
+        $order = Order::create([
+            'customer_id' => $customerId,
+            'address_id' => $data['address_id'],
+            'time_id' => $data['time_id'],
+        ]);
+
+        $products = json_decode($data['products'], true);
+
+        $idIndexedProducts = [];
+
+        Product::whereIn('id', array_keys($products))->get()->each(function (Product $product) use (&$idIndexedProducts) {
+            $idIndexedProducts[$product->id] = $product;
+        });
+
+        $orderProducts = [];
+
+        foreach ($products as $pId => $quantity) {
+            $orderProducts[] = [
+                'order_id' => $order->id,
+                'product_id' => $pId,
+                'quantity' => $quantity,
+                'unit_price' => $idIndexedProducts[$pId]->price,
+            ];
+        }
+
+        OrderProduct::insert($orderProducts);
+
+        $order = Order::with(['products'])->find($order->id);
+
+        return $this->respond($order);
     }
 
     /**

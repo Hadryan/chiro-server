@@ -45,6 +45,8 @@ Route::prefix('v1')->namespace('\App\Http\Controllers\Api\V1')->group(function (
         Route::get('favorites', 'FavoritesController@index');
         Route::post('favorites', 'FavoritesController@add');
         Route::delete('favorites/{productId}', 'FavoritesController@remove')->where(['productId' => '[0-9]+']);
+
+        Route::post('orders', 'OrderController@store');
     });
 
     Route::as('product.image')->post('products/image', 'ProductImageController@store');

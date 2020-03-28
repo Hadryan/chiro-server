@@ -18,7 +18,7 @@ class Order extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['customer_id', 'address_id', 'status'];
+    protected $fillable = ['customer_id', 'address_id', 'status', 'time_id'];
     protected $dates = ['deleted_at'];
 
     /**
@@ -32,6 +32,11 @@ class Order extends Model
     public function shippingAddress()
     {
         return $this->belongsTo('App\Model\ShippingAddress', 'address_id');
+    }
+
+    public function time()
+    {
+        return $this->belongsTo('App\Model\ShippingTime', 'time_id');
     }
 
     public function customer()
